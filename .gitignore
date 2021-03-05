@@ -7,6 +7,17 @@ __pycache__/
 *$py.class
 
 # Django #
+.vscode
+.vscode/
+.vscode/*
 *.log
+.env
+.env.json
 db.sqlite3
+venv
+venv/
+venv/*
+env
+env/
+env/*
 media

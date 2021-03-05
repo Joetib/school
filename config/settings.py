@@ -1,15 +1,35 @@
-import os
+from pathlib import Path
+import environ
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+env = environ.Env(
+    DEBUG=(bool, True),
+    SECRET_KEY = (str, '43)%4yx)aa@a=+_c(fn&kf3g29xax+=+a&key9i=!98zyim=8j'),
+    ALLOWED_HOSTS = (list, ['*']),
+    DB_PORT = (int, 3306),
+    DB_HOST= (str, 'localhost'),
+    EMAIL_PORT = (int, 587),
+    EMAIL_USE_TLS = (bool, True),
+    MEDIA_ROOT = (str, BASE_DIR / "media")
+)
+
+try:
+    environ.Env.read_env(open(BASE_DIR/'.env'))
+except:
+    pass
+
 
 # GENERAL
-# ------------------------------------------------------------------------------
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-# https://docs.djangoproject.com/en/dev/ref/settings/#std:setting-SECRET_KEY
-SECRET_KEY = '43)%4yx)aa@a=+_c(fn&kf3g29xax+=+a&key9i=!98zyim=8j'
+SECRET_KEY = env("SECRET_KEY")
 # https://docs.djangoproject.com/en/dev/ref/settings/#debug
-DEBUG = True
-# https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ["localhost", "0.0.0.0", "127.0.0.1"]
+DEBUG = env('DEBUG')
+ALLOWED_HOSTS = env('ALLOWED_HOSTS')
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 # APPS
 # ------------------------------------------------------------------------------
@@ -29,9 +49,13 @@ INSTALLED_APPS = [
     'allauth.account',
     'crispy_forms',
     'debug_toolbar',
+    
+    # 'django_unicorn',
+    #'unicorn',
 
     # Local
-    'users',
+    'accounts',
+    'administrator',
     'pages',
 ]
 
@@ -63,7 +87,7 @@ WSGI_APPLICATION = "config.wsgi.application"
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [BASE_DIR/'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -79,12 +103,29 @@ TEMPLATES = [
 # DATABASES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+if DEBUG:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        },
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            "ENGINE": "django.db.backends.mysql",
+            'NAME': env('DB_NAME'),
+            'USER': env('DB_USERNAME'),
+            'PASSWORD': env('DB_PASSWORD'),
+            'HOST': env('DB_HOST'),
+            'PORT': env('DB_PORT'),
+            "OPTIONS": {
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+                'charset': 'utf8mb4',
+                'use_unicode': True,
+            }
+        }
+    }
 
 # PASSWORDS
 # ------------------------------------------------------------------------------
@@ -122,17 +163,22 @@ USE_TZ = True
 # STATIC
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#static-root
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-# https://docs.djangoproject.com/en/dev/ref/settings/#static-url
-STATIC_URL = '/static/'
-# https://docs.djangoproject.com/en/dev/ref/contrib/staticfiles/#std:setting-STATICFILES_DIRS
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
-# http://whitenoise.evans.io/en/stable/django.html#add-compression-and-caching-support
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
-# DJANGO-CRISPY-FORMS CONFIGS
-# ------------------------------------------------------------------------------
-# https://django-crispy-forms.readthedocs.io/en/latest/install.html#template-packs
+STATIC_URL = '/static/'
+
+STATIC_ROOT = BASE_DIR / "static"
+MEDIA_URL = "/media/"
+MEDIA_ROOT = env('MEDIA_ROOT')
+CRISPY_TEMPLATE_PACK = "bootstrap4"
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
+
+# login logout redirects
+LOGIN_REDIRECT_URL = "accounts:login_success"
+LOGOUT_REDIRECT_URL = "/"
+
+DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 # EMAIL
@@ -168,6 +214,25 @@ AUTHENTICATION_BACKENDS = (
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
+
+# SESSION DURATION
+SESSION_COOKIE_AGE = 60 * 60 # 1 HOUR
+
+# email settings
+if DEBUG:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = env("EMAIL_HOST")
+    EMAIL_PORT = env("EMAIL_PORT")
+    EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+    EMAIL_USE_TLS = env("EMAIL_USE_TLS")
+    EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+    DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+
+

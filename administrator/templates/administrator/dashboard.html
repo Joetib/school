@@ -1,0 +1,59 @@
+{% extends '_base_dashboard.html' %}
+
+
+{% block dashboard_content %}
+<div class="container ">
+    <div class="row shadow bg-secondary p-0 m-0">
+        
+            <div class="col-6 p-0 text-white text-center">
+                <a class="w-100 h-100 p-5 btn btn-success" href="{% url 'administrator:create-student' %}"> Create Student</a>
+            </div>
+            <div class="col-6  p-0 text-white text-center">
+                <a class="w-100 h-100 btn btn-primary p-5" href="{% url 'administrator:create-teacher' %}">Add Staff</a>
+                
+            </div>
+    </div>
+    
+</div>
+<div class="container py-4">
+    <div class="shadow">
+        <h3 class="p-3">Teachers</h3>
+        <table class="table table-striped">
+            <thead>
+                <td>Username</td><td>First Name</td><td>Last Name</td>
+            </thead>
+            <tbody>
+                {% for teacher in teachers %}
+                <tr>
+                <td>{{ teacher.username }}</td>
+                <td>{{ teacher.first_name }}</td>
+                <td>{{ teacher.last_name }}</td>
+    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="container py-4">
+    <div class="shadow">
+        <h3 class="p-3">Student</h3>
+        <table class="table table-striped">
+            <thead>
+                <td>Username</td><td>First Name</td><td>Last Name</td>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                <td>{{ student.username }}</td>
+                <td>{{ student.first_name }}</td>
+                <td>{{ student.last_name }}</td>
+    
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends '_base_dashboard.html' %}
+
+{% load unicorn %}
+{% load crispy_forms_tags %}
+
+{% block dashboard_content %}
+
+<div class="container">
+    <div class=" m-0 info-color shadow white-text text-center py-4">
+        Create New Teacher
+    </div>
+    <form action="." method="POST", enctype="multipart/form-data">
+        {% csrf_token %}
+        {% crispy teacher_form %}
+        <div class="py-3">
+            <button type="submit" class="btn btn-lg btn-primary">Save</button>
+        </div>
+    </form>
+
+
+</div>
+{% endblock %}
