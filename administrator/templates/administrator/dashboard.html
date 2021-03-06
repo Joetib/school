@@ -15,45 +15,5 @@
     </div>
     
 </div>
-<div class="container py-4">
-    <div class="shadow">
-        <h3 class="p-3">Teachers</h3>
-        <table class="table table-striped">
-            <thead>
-                <td>Username</td><td>First Name</td><td>Last Name</td>
-            </thead>
-            <tbody>
-                {% for teacher in teachers %}
-                <tr>
-                <td>{{ teacher.username }}</td>
-                <td>{{ teacher.first_name }}</td>
-                <td>{{ teacher.last_name }}</td>
-    
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
 
-<div class="container py-4">
-    <div class="shadow">
-        <h3 class="p-3">Student</h3>
-        <table class="table table-striped">
-            <thead>
-                <td>Username</td><td>First Name</td><td>Last Name</td>
-            </thead>
-            <tbody>
-                {% for student in students %}
-                <tr>
-                <td>{{ student.username }}</td>
-                <td>{{ student.first_name }}</td>
-                <td>{{ student.last_name }}</td>
-    
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
 {% endblock %}
