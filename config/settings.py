@@ -50,8 +50,8 @@ INSTALLED_APPS = [
     'crispy_forms',
     'debug_toolbar',
     
-    # 'django_unicorn',
-    #'unicorn',
+    'django_unicorn',
+    'unicorn',
 
     # Local
     'accounts',
@@ -195,7 +195,7 @@ INTERNAL_IPS = ['127.0.0.1']
 # CUSTOM USER MODEL CONFIGS
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/topics/auth/customizing/#substituting-a-custom-user-model
-AUTH_USER_MODEL = 'users.CustomUser'
+AUTH_USER_MODEL = 'accounts.CustomUser'
 
 # DJANGO-ALLAUTH CONFIGS
 # ------------------------------------------------------------------------------

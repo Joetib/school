@@ -127,8 +127,11 @@ class Klass(models.Model):
         ("p2", "Primary Two"),
         ("p3", "Primary Three"),
         ("p4", "Primary Four"),
-        ("p5", "Primary Five")
+        ("p5", "Primary Five"),
         ("p6", "Primary Six"),
+        ('j1', "Junior High 1"),
+        ('j2', "Junior High 2"),
+        ('j3', "Junior High 3"),
     )
     klass_name = models.CharField(choices=CLASS_CHOICES, max_length=2)
     is_active = models.BooleanField()
@@ -138,7 +141,7 @@ class Klass(models.Model):
 
     
     class Meta:
-        unique_together = ('is_active', 'class_name')
+        unique_together = ('is_active', 'klass_name')
         ordering = ("is_active", "klass_name")
     
     def __str__(self):
