@@ -175,16 +175,13 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 
 # login logout redirects
-LOGIN_REDIRECT_URL = "accounts:login_success"
+#LOGIN_REDIRECT_URL = "accounts:login_success"
 LOGOUT_REDIRECT_URL = "/"
+
 
 DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
-# EMAIL
-# ------------------------------------------------------------------------------
-# https://docs.djangoproject.com/en/dev/ref/settings/#email-backend
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 # DJANGO-DEBUG-TOOLBAR CONFIGS
 # ------------------------------------------------------------------------------

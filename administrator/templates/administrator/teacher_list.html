@@ -1,0 +1,20 @@
+{% extends '_base_dashboard.html' %}
+
+{% load unicorn %}
+{% load crispy_forms_tags %}
+
+{% block dashboard_content %}
+{% load unicorn %}
+
+<div class="container">
+    <a href="{% url 'administrator:create-teacher' %}">
+        <div class=" m-0 info-color shadow btn btn-primary w-100 white-text text-center py-4">
+            Create New Teacher
+        </div>
+    </a>
+
+    {% unicorn 'student-list' %}
+
+
+</div>
+{% endblock %}

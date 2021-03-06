@@ -7,9 +7,11 @@ import debug_toolbar
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/default-auth/', include('django.contrib.auth.urls')),
-    path('accounts/allauth/', include('allauth.urls')),
+    path('django-unicorn', include('django_unicorn.urls', namespace="django_unicorn")),
     path('accounts/', include('accounts.urls',  namespace="accounts")),
+    path('accounts/default/', include('django.contrib.auth.urls')),
+    path('accounts/', include('allauth.urls')),
+
     path('', include('pages.urls')),
     path('administrator/', include('administrator.urls', namespace="administrator")),
 ]

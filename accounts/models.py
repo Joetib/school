@@ -1,12 +1,16 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 class CustomUser(AbstractUser):
     
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
+
     picture = models.ImageField(upload_to="profile/", blank=True, null=True)
+    date_of_birth = models.DateField()
 
 
     # True only for administrators
@@ -18,6 +22,12 @@ class CustomUser(AbstractUser):
     # True only for students
     is_student = models.BooleanField(default=False)
 
+    def get_active_class(self):
+        try:
+            if self.is_student:
+                return self.klasses.filter(is_active=True).first()
+        except:
+            return None
     @classmethod
     def create_administrator(cls,  password, email,username=None, picture=None, **kwargs):
         """
@@ -61,7 +71,7 @@ class CustomUser(AbstractUser):
     
 
     def __str__(self):
-        return self.full_name
+        return self.get_full_name()
 
 
 class EducationalBackground(models.Model):
@@ -104,20 +114,20 @@ class Teacher(models.Model):
         unique_together = ('user',)
 
     def __str__(self):
-        return self.user.full_name
+        return self.user.get_full_name()
 
 
 class Student(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="student_profile")
     start_date = models.DateTimeField(default=timezone.now)
     is_active= models.BooleanField(default=True)
-    end_date = models.DateTimeField()
+    end_date = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         ordering = ("is_active", "-start_date")
     
     def __str__(self):
-        return self.user.full_name
+        return self.user.get_full_name()
 
 
 
@@ -134,15 +144,15 @@ class Klass(models.Model):
         ('j3', "Junior High 3"),
     )
     klass_name = models.CharField(choices=CLASS_CHOICES, max_length=2)
-    is_active = models.BooleanField()
-    start_year = models.DateField()
-    end_year = models.DateField()
-    students = models.ManyToManyField(Student, related_name="klasses")
+    is_active = models.BooleanField(default=True)
+    start_year = models.DateField(default=timezone.now)
+    end_year = models.DateField(blank=True, null=True)
+    students = models.ManyToManyField(Student, related_name="klasses", symmetrical=True)
 
     
     class Meta:
-        unique_together = ('is_active', 'klass_name')
-        ordering = ("is_active", "klass_name")
+        unique_together = ('is_active',  'klass_name')
+        ordering = ("-is_active", "klass_name")
     
     def __str__(self):
         return self.klass_name
@@ -157,3 +167,14 @@ class Course(models.Model):
 
     class Meta:
         unique_together = ('klass', 'name', 'is_active')
+
+
+@receiver(post_save, sender=CustomUser)
+def create_related_profile(sender, instance, created=False, **kwargs):
+    """
+    create a new product notification for all followers of a shop
+    """
+    if instance.is_student:
+        Student.objects.get_or_create(user=instance)
+    elif instance.is_teacher:
+        Teacher.objects.get_or_create(user=instance)

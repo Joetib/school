@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .utils import administrator_required
 from . import forms
+from django.views.generic import ListView, TemplateView
 from django.contrib.auth import get_user_model
 # Create your views here.
 
@@ -17,6 +18,12 @@ def dashboard(request):
         'students': User.objects.filter(is_student=True),
     })
 
+class StudentListView(TemplateView):
+    template_name = "administrator/student_list.html"
+
+class TeacherListView(TemplateView):
+    template_name = "administrator/teacher_list.html"
+    
 @login_required
 @administrator_required
 def create_student(request):

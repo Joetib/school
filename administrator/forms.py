@@ -9,6 +9,7 @@ User = get_user_model()
 
 class StudentCreateForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
+    date_of_birth = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
 
     class Meta:
         model = User
@@ -19,6 +20,7 @@ class StudentCreateForm(forms.ModelForm):
             "last_name",
             "password",
             "picture",
+            "date_of_birth",
         )
 
     def __init__(self, *args, **kwargs):
@@ -37,6 +39,7 @@ class StudentCreateForm(forms.ModelForm):
                 Row(
                     Column("first_name", css_class="col-sm-6"),
                     Column("last_name", css_class="col-sm-6"),
+                    Column("date_of_birth", css_class="col-12"),
                 ),
                 css_class="shadow p-3 my-3",
             ),

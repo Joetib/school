@@ -6,6 +6,8 @@ app_name = "administrator"
 
 urlpatterns = [
     path('', views.dashboard, name='dashboard'),
-    path('student/create/', views.create_student, name="create-student"),
-    path('teacher/create/', views.create_teacher, name="create-teacher"),
+    path("students/", views.StudentListView.as_view(), name="student-list"),
+    path('students/create/', views.create_student, name="create-student"),
+    path('teachers/', views.TeacherListView.as_view(), name="teacher-list"),
+    path('teachers/create/', views.create_teacher, name="create-teacher"),
 ]
