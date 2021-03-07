@@ -48,21 +48,23 @@ class StudentCreateForm(forms.ModelForm):
         )
         self.helper.form_tag = False
 
-    def save(self, *args, **kwargs):
-        student = super(StudentCreateForm, self).save(*args, **kwargs)
+    def save(self,is_student=True, commit=True, *args, **kwargs):
+        student = super(StudentCreateForm, self).save(commit=False*args, **kwargs)
         student.set_password(self.cleaned_data["password"])
-        student.is_student = True
-        student.save()
+        if is_student:
+            student.is_student = True
+            if commit:
+                student.save()
         return student
 
 
 class TeacherCreateForm(StudentCreateForm):
-    def save(self, *args, **kwargs):
+    def save(self, commit=True, *args, **kwargs):
 
-        teacher = super(TeacherCreateForm, self).save(*args, **kwargs)
-        teacher.set_password(self.cleaned_data["password"])
+        teacher = super(TeacherCreateForm, self).save(is_student=False, commit=False, *args, **kwargs)
         teacher.is_teacher = True
-        teacher.save()
+        if commit:
+            teacher.save()
         return teacher
 
 

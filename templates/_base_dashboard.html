@@ -42,6 +42,21 @@
       margin: 0;
       padding: 5px;
     }
+    @media (max-width: 1199.98px){
+      .sidebar-fixed.show {
+        display: block;
+        animation: showsidebar 0.6s ease-in;
+      }
+    }
+    @keyframes showsidebar {
+      0%{
+        left: -100%;
+      }
+      100%{
+        left: 0;
+      }
+      
+    }
 
     .login-user{
       width: 100%;
@@ -77,19 +92,15 @@
 
 </head>
 
-<body class="grey lighten-3">
+<body class="bg-light">
 
   <!--Main Navigation-->
   <header>
 
     <!-- Navbar -->
-    <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
+    <nav class="navbar fixed-top navbar-expand-md navbar-light bg-light white scrolling-navbar">
       <div class="container-fluid">
 
-        <!-- Brand -->
-        <a class="navbar-brand waves-effect" href="https://mdbootstrap.com/docs/jquery/" target="_blank">
-          <strong class="blue-text">MDB</strong>
-        </a>
 
         <!-- Collapse -->
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -97,6 +108,11 @@
           <span class="navbar-toggler-icon"></span>
         </button>
 
+        <button class="navbar-toggler" id="side-bar-toggler"  type="button"   
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle sidebar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        
         <!-- Links -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
@@ -144,11 +160,11 @@
     <!-- Navbar -->
 
     <!-- Sidebar -->
-    <div class="sidebar-fixed position-fixed">
+    <div class="sidebar-fixed position-fixed" id="sidebar-fixed">
 
       <div class="login-user m-0 p-0 d-flex flex-row">
         <div class="usrimg">
-          <img src="{% if request.user.picture %}{{request.user.picture.url}}{% endif %}" alt="prof.  pic">
+          <img class="img-thumbnail rounded-cirle" height="70px" width="80px" src="{% if request.user.picture %}{{request.user.picture.url}}{% endif %}" alt="profile  pic">
         </div>
         <div class="usrinfo">
           <p class="m-0 p-0">{{ request.user.username }} <br>
@@ -159,9 +175,7 @@
         </div>
       </div>
 
-      <a class="logo-wrapper waves-effect">
-        <!-- <img src="https://mdbootstrap.com/img/logo/mdb-email.png" class="img-fluid" alt=""> -->
-      </a>
+      
 
       <div class="list-group list-group-flush" style="background-color: #100454;">
         <a href="{% url 'administrator:dashboard' %}" class="list-group-item active waves-effect">
@@ -198,7 +212,7 @@
   <!--Main Navigation-->
 
   <!--Main layout-->
-  <main class="pt-5 mx-lg-5">
+  <main class="pt-5">
     <div class="container-fluid mt-5">
       {% block dashboard_content %}
       {% endblock %}
@@ -250,7 +264,15 @@
       });
     }
   </script>
+<script type="text/javascript" defer>
+  let side_bar=document.getElementById('sidebar-fixed');
+  let side_bar_toggler = document.getElementById("side-bar-toggler");
 
+  side_bar_toggler.addEventListener('click', function(e){
+    side_bar.classList.toggle('show');
+     
+  });
+</script>
 </body>
 
 </html>

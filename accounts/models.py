@@ -25,7 +25,7 @@ class CustomUser(AbstractUser):
     def get_active_class(self):
         try:
             if self.is_student:
-                return self.klasses.filter(is_active=True).first()
+                return self.student_profile.klasses.filter(is_active=True).first()
         except:
             return None
     @classmethod
@@ -159,7 +159,7 @@ class Klass(models.Model):
             if self.is_active:
                 Klass.objects.filter(is_active=True, klass_name=self.klass_name).update(is_active=False, end_year=timezone.now().date())
         super().save(*args, **kwargs)
-        
+
     def __str__(self):
         return self.klass_name
 
