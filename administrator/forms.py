@@ -1,3 +1,4 @@
+from accounts.models import Klass
 from django import forms
 from django.contrib.auth import get_user_model
 from crispy_forms.helper import FormHelper
@@ -9,7 +10,7 @@ User = get_user_model()
 
 class StudentCreateForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
-    date_of_birth = forms.DateField(widget=forms.DateInput(attrs={'type': 'date'}))
+    date_of_birth = forms.DateField(widget=forms.DateInput(attrs={"type": "date"}))
 
     class Meta:
         model = User
@@ -49,16 +50,41 @@ class StudentCreateForm(forms.ModelForm):
 
     def save(self, *args, **kwargs):
         student = super(StudentCreateForm, self).save(*args, **kwargs)
-        student.set_password(self.cleaned_data['password'])
+        student.set_password(self.cleaned_data["password"])
         student.is_student = True
         student.save()
         return student
+
 
 class TeacherCreateForm(StudentCreateForm):
     def save(self, *args, **kwargs):
 
         teacher = super(TeacherCreateForm, self).save(*args, **kwargs)
-        teacher.set_password(self.cleaned_data['password'])
+        teacher.set_password(self.cleaned_data["password"])
         teacher.is_teacher = True
         teacher.save()
         return teacher
+
+
+class KlassCreateForm(forms.ModelForm):
+    start_year = forms.DateField(widget=forms.DateInput(attrs={"type": "date"}))
+    end_year = forms.DateField(required=False, widget=forms.DateInput(attrs={"type": "date"}))
+
+    class Meta:
+        model = Klass
+        fields = ("klass_name", "is_active", "start_year", "end_year")
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Column("klass_name"),
+            Column("is_active"),
+            Column(
+                Row(
+                    Column("start_year", css_class="col-sm-6"),
+                    Column("end_year", css_class="col-sm-6 "),
+                ),
+            ),
+        )
+        self.helper.form_tag = False

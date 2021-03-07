@@ -12,4 +12,5 @@ urlpatterns = [
     path('teachers/create/', views.create_teacher, name="create-teacher"),
     path('student/<int:id>/profile/', views.student_profile, name="student-profile"),
     path('teacher/<int:id>/profile/', views.teacher_profile, name="teacher-profile"),
+    path('classes/create/', views.create_klass, name="create-class"),
 ]

@@ -154,6 +154,12 @@ class Klass(models.Model):
         unique_together = ('is_active',  'klass_name')
         ordering = ("-is_active", "klass_name")
     
+    def save(self, *args, **kwargs):
+        if not self.pk:
+            if self.is_active:
+                Klass.objects.filter(is_active=True, klass_name=self.klass_name).update(is_active=False, end_year=timezone.now().date())
+        super().save(*args, **kwargs)
+        
     def __str__(self):
         return self.klass_name
 
