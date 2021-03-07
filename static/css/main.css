@@ -60,7 +60,7 @@ a:hover{
 }
 
 .fees-info{
-    height: 200px;
+    min-height: 200px;
     background-color: white;
     padding: 5px;
 }

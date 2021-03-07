@@ -2,99 +2,117 @@
 {% load static %}
 
 {% block dashboard_content %}
-<div class="row">
-    <div class="col-md-4 col-lg-3 badges">
-        <a class="badge-content" href="{% url 'administrator:student-list' %}">
-            <div class="card-ico">
-                <img class="ico" src="{% static 'images/student_icon.png' %}" alt="nt fnd">
-                <br> Students
-            </div>
-            <div class="m-3 vertical-line"></div>
-            <div class="stdnumber">
-                {{ students.count }}
-            </div>
-        </a>
+<div class="container ">
+    <div class="row">
+        <div class="col-md-4 col-lg-3 badges">
+            <a class="badge-content" href="{% url 'administrator:student-list' %}">
+                <div class="card-ico">
+                    <img class="ico" src="{% static 'images/student_icon.png' %}" alt="nt fnd">
+                    <br> Students
+                </div>
+                <div class="m-3 vertical-line"></div>
+                <div class="stdnumber">
+                    {{ students.count }}
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4 col-lg-3 badges">
+            <a class="badge-content" href="{% url 'administrator:teacher-list' %}">
+                <div class="card-ico">
+                    <img class="ico" src="{% static 'images/staff_icon.png' %}" alt="nt fnd">
+                    <br> Staffs
+                </div>
+                <div class="m-3 vertical-line"></div>
+                <div class="stdnumber">
+                    {{ teachers.count }}
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4 col-lg-3 badges">
+            <a class="badge-content" href="#">
+                <div class="card-ico">
+                    <img class="ico" src="{% static 'images/workers_icon.png' %}" alt="nt fnd">
+                    <br> Workers
+                </div>
+                <div class="m-3 vertical-line"></div>
+                <div class="stdnumber">
+                    100
+                </div>
+            </a>
+        </div>
+        <div class="col-md-4 col-lg-3 badges">
+            <a class="badge-content" href="#">
+                <div class="card-ico">
+                    <img class="ico" src="{% static 'images/workewrs_icon.png' %}" alt="nt fnd">
+                    <br> some data
+                </div>
+                <div class="m-3 vertical-line"></div>
+                <div class="stdnumber">
+                    100
+                </div>
+            </a>
+        </div>
     </div>
-    <div class="col-md-4 col-lg-3 badges">
-        <a class="badge-content" href="{% url 'administrator:teacher-list' %}">
-            <div class="card-ico">
-                <img class="ico" src="{% static 'images/staff_icon.png' %}" alt="nt fnd">
-                <br> Staffs
-            </div>
-            <div class="m-3 vertical-line"></div>
-            <div class="stdnumber">
-                {{ teachers.count }}
-            </div>
-        </a>
-    </div>
-    <div class="col-md-4 col-lg-3 badges">
-        <a class="badge-content" href="#">
-            <div class="card-ico">
-                <img class="ico" src="{% static 'images/workers_icon.png' %}" alt="nt fnd">
-                <br> Workers
-            </div>
-            <div class="m-3 vertical-line"></div>
-            <div class="stdnumber">
-                100
-            </div>
-        </a>
-    </div>
-    <div class="col-md-4 col-lg-3 badges">
-        <a class="badge-content" href="#">
-            <div class="card-ico">
-                <img class="ico" src="{% static 'images/workewrs_icon.png' %}" alt="nt fnd">
-                <br> some data
-            </div>
-            <div class="m-3 vertical-line"></div>
-            <div class="stdnumber">
-                100
-            </div>
-        </a>
-    </div>
-</div>
 
-<div class="row mt-3">
-    <div class="col-lg-6 badges">
-        <div class="fees-info p-3">
-            <div class="fee-text">
-                <i class="fas fa-hand-holding-usd mr-3 text-success"></i> Fees Collection
+    <div class="row mt-3">
+        <div class="col-lg-6 badges">
+            <div class="fees-info p-3">
+                <div class="fee-text">
+                    <i class="fas fa-hand-holding-usd mr-3 text-success"></i> Fees Collection
+                    <hr>
+                </div>
+                <div class="row">
+
+                <div class="col-6  p-0 text-white text-center">
+                    <a class="w-100 h-100 btn btn-light p-5" href="{% url 'administrator:create-class' %}">Create
+                        Class</a>
+
+                </div>
+                <div class="col-6">
+                    som content here and more of Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis
+                    explicabo eum dolor necessitatibus repudiandae aperiam debitis minima maiores accusantium ducimus
+                    dicta adipisci at, exercitationem nesciunt fugit quia, corrupti reiciendis facilis?
+                </div>
+            </div>
+
+            </div>
+        </div>
+        <div class="col-lg-6 badges">
+            <div class="fees-info p-3">
+                <div class="academic-cal-text">
+                    <i class="far fa-calendar-alt mr-3 text-warning"></i> Academic Calender
+                    <hr>
+                </div>
+                <div>
+                    som content here and more of Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis
+                    explicabo eum dolor necessitatibus repudiandae aperiam debitis minima maiores accusantium ducimus
+                    dicta adipisci at, exercitationem nesciunt fugit quia, corrupti reiciendis facilis?
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-lg-4">
+            <div class="upcoming-event p-3 card1">
+                <i class="fas fa-calendar-day mr-3 text-primary"></i> Upcoming Event
                 <hr>
             </div>
-            som content here and more of Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis explicabo eum dolor necessitatibus repudiandae aperiam debitis minima maiores accusantium ducimus dicta adipisci at, exercitationem nesciunt fugit quia, corrupti reiciendis facilis?
         </div>
-    </div>
-    <div class="col-lg-6 badges">
-        <div class="fees-info p-3">
-            <div class="academic-cal-text">
-                <i class="far fa-calendar-alt mr-3 text-warning"></i> Academic Calender
+        <div class="col-lg-4">
+            <div class="notice-board p-3 card1">
+                <i class="fas fa-columns text-danger"></i> Notice Board
                 <hr>
             </div>
-            som content here and more of Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis explicabo eum dolor necessitatibus repudiandae aperiam debitis minima maiores accusantium ducimus dicta adipisci at, exercitationem nesciunt fugit quia, corrupti reiciendis facilis?
         </div>
-    </div>
-</div>
-
-<div class="row mt-3">
-    <div class="col-lg-4">
-        <div class="upcoming-event p-3 card1">
-            <i class="fas fa-calendar-day mr-3 text-primary"></i> Upcoming Event
-            <hr>
-        </div>
-    </div>
-    <div class="col-lg-4">
-        <div class="notice-board p-3 card1">
-            <i class="fas fa-columns text-danger mr-3"></i> Notice Board
-            <hr>
-        </div>
-    </div>
-    <div class="col-lg-4">
-        <div class="recent-activities p-3 card1">
-            <i class="fas fa-calendar-check mr-3 text-primary"></i> Recent Activities
-            <hr>
+        <div class="col-lg-4">
+            <div class="notice-board p-3 card1">
+                <i class="fas fa-columns text-danger"></i> Recent Activities
+                <hr>
+            </div>
         </div>
     </div>
 </div>
 
 <br>
-
 {% endblock %}
