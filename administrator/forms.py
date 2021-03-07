@@ -68,7 +68,7 @@ class TeacherCreateForm(StudentCreateForm):
 
 class KlassCreateForm(forms.ModelForm):
     start_year = forms.DateField(widget=forms.DateInput(attrs={"type": "date"}))
-    end_year = forms.DateField(widget=forms.DateInput(attrs={"type": "date"}))
+    end_year = forms.DateField(required=False, widget=forms.DateInput(attrs={"type": "date"}))
 
     class Meta:
         model = Klass
