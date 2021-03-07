@@ -77,4 +77,11 @@ def create_klass(request: HttpRequest, *args, **kwargs) -> HttpResponse:
     else:
         form = forms.KlassCreateForm()
     return render(request, 'administrator/create_class.html', {'form': form})
-    
+
+class KlassListview(ListView):
+    model = Klass
+    template_name = "administrator/class_list.html"
+    context_object_name = "classes"
+
+    def qet_queryset(self, *args, **kwargs):
+        return Klass.objects.filter(end_year__gte=timezene.now())
