@@ -6,14 +6,16 @@
 {% block dashboard_content %}
 {% load unicorn %}
 
-<div class="container">
-    <a href="{% url 'administrator:create-teacher' %}">
-        <div class=" m-0 info-color shadow btn btn-primary w-100 white-text text-center py-4">
-            Create New Teacher
-        </div>
-    </a>
+<div class="row">
+    <div class="container">
+        <a href="{% url 'administrator:create-teacher' %}">
+            <div class=" m-0 info-color shadow btn btn-primary w-100 white-text text-center py-4">
+                <i class="fas fa-plus-circle mr-4"></i> Register New Teacher
+            </div>
+        </a>
+    </div>
 
-    {% unicorn 'student-list' %}
+    {% unicorn 'teachers-list' %}
 
 
 </div>

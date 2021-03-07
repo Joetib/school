@@ -5,6 +5,8 @@ from .utils import administrator_required
 from . import forms
 from django.views.generic import ListView, TemplateView
 from django.contrib.auth import get_user_model
+
+from accounts.models import Student, Teacher
 # Create your views here.
 
 User = get_user_model()
@@ -51,3 +53,15 @@ def create_teacher(request):
     else:
         teacher_form = forms.TeacherCreateForm()
     return render(request, 'administrator/create_teacher.html', {'teacher_form': teacher_form})
+
+@login_required
+@administrator_required
+def student_profile(request, id):
+    student = Student.objects.filter(user_id=id)
+    return render(request, 'administrator/student_profile.html', {'student':student,})
+
+@login_required
+@administrator_required
+def teacher_profile(request, id):
+    teacher = Teacher.objects.filter(user_id=id)
+    return render(request, 'administrator/teacher_profile.html', {'teacher':teacher,})
