@@ -1,9 +1,12 @@
+from accounts.models import Klass
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .utils import administrator_required
+from django.http.request import HttpRequest
+from django.http.response import HttpResponse
 from . import forms
-from django.views.generic import ListView, TemplateView
+from django.views.generic import ListView, TemplateView, CreateView
 from django.contrib.auth import get_user_model
 # Create your views here.
 
@@ -23,7 +26,7 @@ class StudentListView(TemplateView):
 
 class TeacherListView(TemplateView):
     template_name = "administrator/teacher_list.html"
-    
+
 @login_required
 @administrator_required
 def create_student(request):
@@ -51,3 +54,14 @@ def create_teacher(request):
     else:
         teacher_form = forms.TeacherCreateForm()
     return render(request, 'administrator/create_teacher.html', {'teacher_form': teacher_form})
+
+def create_klass(request: HttpRequest, *args, **kwargs) -> HttpResponse:
+    if request.method == "POST":
+        form = forms.KlassCreateForm(request.POST, files=request.FILES)
+        if form.is_valid():
+            klass = form.save()
+            return redirect("administrator:dashboard")
+    else:
+        form = forms.KlassCreateForm()
+    return render(request, 'administrator/create_class.html', {'form': form})
+    
