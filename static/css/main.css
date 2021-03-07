@@ -1,0 +1,74 @@
+
+main{
+    background-color: #f0f1f3;
+}
+a{
+    text-decoration: none;
+    color: rgb(26, 26, 26);
+}
+a:hover{
+    text-decoration: none;
+    color: rgb(26, 26, 26);
+}
+.badges{
+    padding: 10px;
+}
+
+.badge-content{
+    background-color: white;
+    padding: 5px;
+    border-radius: 2px;
+    height: 140px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.vertical-line{
+    border-left: 1px solid black;
+    height: 60px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.badge-content:hover{
+    background-color: #f0f1f3;
+}
+
+
+.stdnumber{
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 35px;
+}
+
+.card-ico{
+    text-align: center;
+}
+
+.ico{
+    width: 55px;
+    height: 55px;
+}
+
+.stdimg{
+    width: 40px;
+    height: 40px;
+}
+
+.fees-info{
+    min-height: 200px;
+    background-color: white;
+    padding: 5px;
+}
+
+.fee-text, .academic-cal-text, .recent-activities,
+.notice-board, .upcoming-event{
+    font-weight: bolder;
+    font-size: 18px;
+}
+
+.card1{
+    height: 300px;
+    background-color: white;
+}

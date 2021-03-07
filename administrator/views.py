@@ -8,6 +8,8 @@ from django.http.response import HttpResponse
 from . import forms
 from django.views.generic import ListView, TemplateView, CreateView
 from django.contrib.auth import get_user_model
+
+from accounts.models import Student, Teacher
 # Create your views here.
 
 User = get_user_model()
@@ -55,6 +57,17 @@ def create_teacher(request):
         teacher_form = forms.TeacherCreateForm()
     return render(request, 'administrator/create_teacher.html', {'teacher_form': teacher_form})
 
+@login_required
+@administrator_required
+def student_profile(request, id):
+    student = Student.objects.filter(user_id=id)
+    return render(request, 'administrator/student_profile.html', {'student':student,})
+
+@login_required
+@administrator_required
+def teacher_profile(request, id):
+    teacher = Teacher.objects.filter(user_id=id)
+    return render(request, 'administrator/teacher_profile.html', {'teacher':teacher,})
 def create_klass(request: HttpRequest, *args, **kwargs) -> HttpResponse:
     if request.method == "POST":
         form = forms.KlassCreateForm(request.POST, files=request.FILES)

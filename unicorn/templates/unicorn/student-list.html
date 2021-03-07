@@ -1,9 +1,9 @@
-<div>
+<div class="container-fluid">
     <!-- put component code here -->
-    <div class="container  mt-5 py-3 shadow">
+    <div class="container  mt-2 py-3 shadow">
         
         <input type="text" unicorn:model="query_string" class="form-control"
-            placeholder="Enter search term...">
+            placeholder="Enter Name...">
     </div>
     <div class="py-5">
         <table class="table table-striped shadow">
@@ -14,6 +14,7 @@
                     <th>Last Name</th>
                     <th>Class</th>
                     <th>Date of birth</th>
+                    <th>Profile</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,6 +24,7 @@
                     <td>{{ student.last_name }}</td>
                     <td>{{ student.get_active_class }}</td>
                     <td>{{ student.date_of_birth }}</td>
+                    <td><a href="{% url 'administrator:student-profile' student.id %}" class="btn btn-sm btn-success">View Profile</a></td>
                 </tr>
                 {% empty %}
                 <tr>

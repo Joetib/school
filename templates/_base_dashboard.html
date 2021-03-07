@@ -19,6 +19,8 @@
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
   <!-- Your custom styles (optional) -->
   <link href="{% static 'css/style.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/main.css' %}" rel="stylesheet">
+  
   <style>
     .map-container {
       overflow: hidden;
@@ -34,6 +36,39 @@
       width: 100%;
       position: absolute;
     }
+
+    .sidebar-fixed{
+      background-color: #100454;
+      margin: 0;
+      padding: 5px;
+    }
+
+    .login-user{
+      width: 100%;
+      height: 60px;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 5px;
+      justify-content: left;
+      align-items: center;
+      border-radius: 9px;
+    }
+
+    .usrinfo{
+      font-weight: bolder;
+      margin-left: 5px;
+      text-transform: capitalize;
+    }
+
+    .admstatus{
+      font-size: 0.75rem;
+    }
+
+    .list-group-item{
+      background-color: #100454;
+      color: white;
+    }
+
   </style>
   {% load unicorn %}
 
@@ -111,22 +146,49 @@
     <!-- Sidebar -->
     <div class="sidebar-fixed position-fixed">
 
+      <div class="login-user m-0 p-0 d-flex flex-row">
+        <div class="usrimg">
+          <img src="{% if request.user.picture %}{{request.user.picture.url}}{% endif %}" alt="prof.  pic">
+        </div>
+        <div class="usrinfo">
+          <p class="m-0 p-0">{{ request.user.username }} <br>
+            <span class="admstatus">
+              Admin
+            </span>
+          </p>
+        </div>
+      </div>
+
       <a class="logo-wrapper waves-effect">
-        <img src="https://mdbootstrap.com/img/logo/mdb-email.png" class="img-fluid" alt="">
+        <!-- <img src="https://mdbootstrap.com/img/logo/mdb-email.png" class="img-fluid" alt=""> -->
       </a>
 
-      <div class="list-group list-group-flush">
-        <a href="#" class="list-group-item active waves-effect">
+      <div class="list-group list-group-flush" style="background-color: #100454;">
+        <a href="{% url 'administrator:dashboard' %}" class="list-group-item active waves-effect">
           <i class="fas fa-chart-pie mr-3"></i>Dashboard
         </a>
+        <a href="{% url 'administrator:student-list' %}" 
+        class="list-group-item list-group-item-action waves-effect">
+          <i class="fas fa-user-graduate mr-3"></i>Students</a>
+        <a href="{% url 'administrator:teacher-list' %}" 
+        class="list-group-item list-group-item-action waves-effect">
+          <i class="fas fa-user-tie mr-3"></i>Teachers</a>
         <a href="#" class="list-group-item list-group-item-action waves-effect">
-          <i class="fas fa-user mr-3"></i>Profile</a>
+          <i class="fas fa-chalkboard-teacher mr-3"></i>Classes</a>
         <a href="#" class="list-group-item list-group-item-action waves-effect">
-          <i class="fas fa-table mr-3"></i>Tables</a>
+          <i class="fas fa-book mr-3"></i>Subjects</a>
         <a href="#" class="list-group-item list-group-item-action waves-effect">
-          <i class="fas fa-map mr-3"></i>Maps</a>
+          <i class="fas fa-edit mr-3"></i>Exams</a>
         <a href="#" class="list-group-item list-group-item-action waves-effect">
-          <i class="fas fa-money-bill-alt mr-3"></i>Orders</a>
+          <i class="far fa-check-square mr-3"></i>Attendance</a>
+        <a href="#" class="list-group-item list-group-item-action waves-effect">
+          <i class="far fa-paper-plane mr-3"></i>Messages</a>
+        <a href="#" class="list-group-item list-group-item-action waves-effect">
+          <i class="far fa-user-circle mr-3"></i>Account</a>
+        <a href="#" class="list-group-item list-group-item-action waves-effect">
+          <i class="fas fa-lock mr-3"></i>Log Out</a>
+
+          
       </div>
 
     </div>

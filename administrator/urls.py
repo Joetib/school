@@ -10,5 +10,7 @@ urlpatterns = [
     path('students/create/', views.create_student, name="create-student"),
     path('teachers/', views.TeacherListView.as_view(), name="teacher-list"),
     path('teachers/create/', views.create_teacher, name="create-teacher"),
+    path('student/<int:id>/profile/', views.student_profile, name="student-profile"),
+    path('teacher/<int:id>/profile/', views.teacher_profile, name="teacher-profile"),
     path('classes/create/', views.create_klass, name="create-class"),
 ]
