@@ -1,0 +1,39 @@
+{% extends '_base_dashboard.html' %}
+{% load static %}
+
+{% block dashboard_content %}
+<div class="row">
+    <div class="container">
+        <a href="{% url 'administrator:create-class' %}">
+            <div class=" m-0 info-color shadow btn btn-primary w-100 white-text text-center py-4">
+                <i class="fas fa-plus-circle mr-4"></i> Add Class
+            </div>
+        </a>
+    </div>
+
+    {% for class in classes %}
+    <div class="col-md-4 col-lg-3 badges">
+        <a class="cls shadow  {% cycle 'bg-info' 'bg-primary' 'bg-success' 'bg-warning' 'bg-secondary' %}" 
+        href="#">
+        <div class="cls-name text-uppercase font-bolder">
+            {{ class.klass_name }}
+        </div>
+            <div class="cls-info">
+                <div class="stdnumber mr-2">
+                    {{ class.students.count }}
+                </div>
+                students
+            </div>
+            <hr>
+            <div class="cls-teachers">
+                {{ class.teachers.count }} Teachers <span class="ml-3">
+                    {{ class.courses.count }} Subjects</span>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+<br>
+
+{% endblock %}

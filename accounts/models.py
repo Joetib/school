@@ -133,20 +133,21 @@ class Student(models.Model):
 
 class Klass(models.Model):
     CLASS_CHOICES=(
-        ('p1', "Primary One"),
-        ("p2", "Primary Two"),
-        ("p3", "Primary Three"),
-        ("p4", "Primary Four"),
-        ("p5", "Primary Five"),
-        ("p6", "Primary Six"),
-        ('j1', "Junior High 1"),
-        ('j2', "Junior High 2"),
-        ('j3', "Junior High 3"),
+        ('stage 1', "Primary One"),
+        ("stage 2", "Primary Two"),
+        ("stage 3", "Primary Three"),
+        ("stage 4", "Primary Four"),
+        ("stage 5", "Primary Five"),
+        ("stage 6", "Primary Six"),
+        ('jhs 1', "Junior High 1"),
+        ('jhs 2', "Junior High 2"),
+        ('jhs 3', "Junior High 3"),
     )
-    klass_name = models.CharField(choices=CLASS_CHOICES, max_length=2)
+    klass_name = models.CharField(choices=CLASS_CHOICES, max_length=10)
     is_active = models.BooleanField(default=True)
     start_year = models.DateField(default=timezone.now)
     end_year = models.DateField(blank=True, null=True)
+    teachers = models.ManyToManyField(Teacher, related_name="teachers", symmetrical=True)
     students = models.ManyToManyField(Student, related_name="klasses", symmetrical=True)
 
     

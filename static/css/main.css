@@ -2,6 +2,9 @@
 main{
     background-color: #f0f1f3;
 }
+.bg-def{
+    background-color: #100454;
+}
 a{
     text-decoration: none;
     color: rgb(26, 26, 26);
@@ -71,4 +74,28 @@ a:hover{
 .card1{
     height: 300px;
     background-color: white;
+}
+
+.cls{
+    background-color: white;
+    padding: 5px;
+    border-radius: 2px;
+    height: 140px; 
+    display: block;
+    color: white;
+}
+
+.cls-name{
+    font-weight: bolder;
+}
+
+.cls:hover{
+    background-color: #f0f1f3;
+
+}
+
+.cls-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
