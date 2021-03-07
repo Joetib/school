@@ -3,7 +3,7 @@
 
 {% block dashboard_content %}
 <div class="container ">
-    <div class="row shadow bg-secondary p-0 m-0">
+    <div class="row shadow  p-0 m-0">
         
             <div class="col-6 p-0 text-white text-center">
                 <a class="w-100 h-100 p-5 btn btn-success" href="{% url 'administrator:student-list' %}">Student</a>
@@ -12,8 +12,11 @@
                 <a class="w-100 h-100 btn btn-primary p-5" href="{% url 'administrator:teacher-list' %}">Staff</a>
                 
             </div>
+            <div class="col-6  p-0 text-white text-center">
+                <a class="w-100 h-100 btn btn-light p-5" href="{% url 'administrator:create-class' %}">Create Class</a>
+                
+            </div>
     </div>
     
 </div>
-
 {% endblock %}
