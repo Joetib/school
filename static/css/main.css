@@ -1,6 +1,6 @@
 
 main{
-    background-color: #fcfcfc;
+    background-color: #f0f1f3;
 }
 .bg-def{
     background-color: #100454;
@@ -98,4 +98,30 @@ a:hover{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.stdpic{
+    width: 150px;
+    height: 150px;
+}
+
+.userpic{
+    text-align: center;
+    align-items: center;
+}
+
+.b-radius{
+    border-radius: 9px;
+}
+
+.b-radius-sm{
+    border-radius: 5px;
+}
+
+.curi-font{
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.text-bolder{
+    font-weight: bolder;
 }

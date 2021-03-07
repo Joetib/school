@@ -11,7 +11,7 @@
 
                     <th>First Name</th>
                     <th>Last Name</th>
-                    <th>Class</th>
+                    <th>Classes</th>
                     <th>Date of birth</th>
                     <th>Profile</th>
                 </tr>
@@ -21,7 +21,9 @@
                 <tr>
                     <td>{{ teacher.first_name }}</td>
                     <td>{{ teacher.last_name }}</td>
-                    <td>{{ teacher.get_active_class }}</td>
+                    <td>
+                        {{ teacher.get_active_class }}
+                    </td>
                     <td>{{ teacher.date_of_birth }}</td>
                     <td><a href="{% url 'administrator:teacher-profile' teacher.id %}" class="btn btn-sm btn-success">View Profile</a></td>
                 </tr>

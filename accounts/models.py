@@ -5,12 +5,15 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 class CustomUser(AbstractUser):
-    
+    SEX_CHOICES=(
+        ('Male', "M"),('Female', "F"),
+        )
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
 
     picture = models.ImageField(upload_to="profile/", blank=True, null=True)
     date_of_birth = models.DateField()
+    sex = models.CharField(choices=SEX_CHOICES, max_length=8)
 
 
     # True only for administrators

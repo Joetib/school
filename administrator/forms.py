@@ -22,6 +22,7 @@ class StudentCreateForm(forms.ModelForm):
             "password",
             "picture",
             "date_of_birth",
+            "sex",
         )
 
     def __init__(self, *args, **kwargs):
@@ -44,7 +45,13 @@ class StudentCreateForm(forms.ModelForm):
                 ),
                 css_class="shadow p-3 my-3",
             ),
-            Column("picture", css_class="shadow py-3 my-3"),
+            Column(
+                Row(
+                    Column("picture", css_class="col-sm-6"),
+                    Column("sex", css_class="col-sm-6"),
+                ),
+                css_class="shadow p-3 my-3",
+            ),
         )
         self.helper.form_tag = False
 

@@ -1,5 +1,5 @@
 from accounts.models import Klass
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .utils import administrator_required
@@ -60,14 +60,15 @@ def create_teacher(request):
 @login_required
 @administrator_required
 def student_profile(request, id):
-    student = Student.objects.filter(user_id=id)
+    student = get_object_or_404(Student, id=id)
     return render(request, 'administrator/student_profile.html', {'student':student,})
 
 @login_required
 @administrator_required
 def teacher_profile(request, id):
-    teacher = Teacher.objects.filter(user_id=id)
+    teacher = get_object_or_404(Teacher, id=id)
     return render(request, 'administrator/teacher_profile.html', {'teacher':teacher,})
+
 def create_klass(request: HttpRequest, *args, **kwargs) -> HttpResponse:
     if request.method == "POST":
         form = forms.KlassCreateForm(request.POST, files=request.FILES)
@@ -85,3 +86,9 @@ class KlassListview(ListView):
 
     def qet_queryset(self, *args, **kwargs):
         return Klass.objects.filter(end_year__gte=timezene.now())
+
+
+""" class SubjectList(ListView):
+    model = Course
+    template_name = 'administration/subject_list.html'
+    context_object_name = 'subjects' """

@@ -9,7 +9,7 @@
         <table class="table table-striped shadow bg-white">
             <thead>
                 <tr>
-
+                    <th>#</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Class</th>
@@ -20,6 +20,7 @@
             <tbody>
                 {% for student in students %}
                 <tr>
+                    <td>{{ forloop.counter }}</td>
                     <td>{{ student.first_name }}</td>
                     <td>{{ student.last_name }}</td>
                     <td>{{ student.get_active_class }}</td>
