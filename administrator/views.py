@@ -10,6 +10,7 @@ from django.views.generic import ListView, TemplateView, CreateView
 from django.contrib.auth import get_user_model
 
 from accounts.models import Student, Teacher
+from datetime import datetime
 # Create your views here.
 
 User = get_user_model()
@@ -60,14 +61,16 @@ def create_teacher(request):
 @login_required
 @administrator_required
 def student_profile(request, id):
-    student = get_object_or_404(Student, id=id)
-    return render(request, 'administrator/student_profile.html', {'student':student,})
+    student = get_object_or_404(Student, user__id=id)
+    age = int((datetime.now().date() - student.user.date_of_birth).days / 365 )
+    return render(request, 'administrator/student_profile.html', {'student':student,'age':age,})
 
 @login_required
 @administrator_required
 def teacher_profile(request, id):
-    teacher = get_object_or_404(Teacher, id=id)
-    return render(request, 'administrator/teacher_profile.html', {'teacher':teacher,})
+    teacher = get_object_or_404(Teacher, user__id=id)
+    age = int((datetime.now().date() - teacher.user.date_of_birth).days / 365 )
+    return render(request, 'administrator/teacher_profile.html', {'teacher':teacher,'age':age})
 
 def create_klass(request: HttpRequest, *args, **kwargs) -> HttpResponse:
     if request.method == "POST":

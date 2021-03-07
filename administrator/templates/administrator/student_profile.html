@@ -39,6 +39,32 @@
                 </div>
             </div>
             <hr>
+            <div class="row">
+                <div class="col-6">
+                    DoB: <span class="mr-3">{{ student.user.date_of_birth }}</span>
+                </div>
+                <div class="col-6">
+                    Age: <span class="mr-3">{{ age }}</span>
+                </div>
+            </div>
+            <hr>
+            <span class="text-center text-bolder">Health Info</span>
+            <hr>
+            <div class="row">
+                <div class="col-6">
+                    NHIS #: <span class="mr-3">{{ student.health_insurance }}</span>
+                </div>
+                <div class="col-6">
+                    Physically Disabled: <span class="mr-3">{% if student.physically_disabled %} Yes {% else %} No {% endif %}</span>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-6">
+                    Any Known Disease: <span class="mr-3">{{ student.known_health_disorder }}</span>
+                </div>
+            </div>
+            <hr>
             <span class="text-center text-bolder">Parent Info</span>
             <hr>
             <div class="row">
@@ -55,7 +81,7 @@
                     Email: <span class="mr-3">{{ student.user.email }}</span>
                 </div>
                 <div class="col-6">
-                    Address: <span class="mr-3">{{ student.user.address }}</span>
+                    Address: <span class="mr-3">{{ student.address }}</span>
                 </div>
             </div>
             <hr>
@@ -66,7 +92,7 @@
                     Emergeny Contact Person: <span class="mr-3">{{ student.emergency_contact_person }}</span>
                 </div>
                 <div class="col-6">
-                    Emergency Contact #: <span class="mr-3">{{ student.emergency_phone }}</span>
+                    Emergency Contact #: <span class="mr-3">{{ student.emergency_contact_phone }}</span>
                 </div>
             </div>
         </div>

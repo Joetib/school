@@ -12,8 +12,8 @@ class CustomUser(AbstractUser):
     last_name = models.CharField(max_length=200)
 
     picture = models.ImageField(upload_to="profile/", blank=True, null=True)
-    date_of_birth = models.DateField()
-    sex = models.CharField(choices=SEX_CHOICES, max_length=8)
+    date_of_birth = models.DateField(null=True)
+    sex = models.CharField(choices=SEX_CHOICES, max_length=8, null=True)
 
 
     # True only for administrators
@@ -111,7 +111,20 @@ class Address(models.Model):
 
 class Teacher(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="teacher_profile")
+    address = models.CharField(max_length=100)
+    phone_number = models.CharField(max_length=10)
+    position = models.CharField(max_length=100)
     
+    ##health info
+    health_insurance = models.CharField(max_length=10)
+    known_health_disorder = models.CharField(max_length=100)
+    physically_disabled = models.BooleanField(default=False)
+
+
+    ##emergency
+    emergency_contact_person = models.CharField(max_length=100)
+    emergency_contact_phone = models.CharField(max_length=10)
+
     is_active=models.BooleanField(default=True)
     class Meta:
         unique_together = ('user',)
@@ -123,6 +136,20 @@ class Teacher(models.Model):
 class Student(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE, related_name="student_profile")
     start_date = models.DateTimeField(default=timezone.now)
+
+    ##health info
+    health_insurance = models.CharField(max_length=10)
+    known_health_disorder = models.CharField(max_length=100)
+    physically_disabled = models.BooleanField(default=False)
+
+    ## gurdian info
+    parent_name = models.CharField(max_length=100)
+    parent_phone_number = models.CharField(max_length=10)
+    address = models.CharField(max_length=100)
+    ##emergency
+    emergency_contact_person = models.CharField(max_length=100)
+    emergency_contact_phone = models.CharField(max_length=10)
+
     is_active= models.BooleanField(default=True)
     end_date = models.DateTimeField(blank=True, null=True)
 

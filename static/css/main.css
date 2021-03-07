@@ -125,3 +125,8 @@ a:hover{
 .text-bolder{
     font-weight: bolder;
 }
+
+.cls-btns{
+    justify-content: right;
+    float: right;
+}
