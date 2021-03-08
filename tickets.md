@@ -17,7 +17,6 @@
 
 - [ ] Enter Student Results for a course
 - [ ] View Student Results
-
 - [ ] Post academic materials for a course
 - [ ] Create an online Quiz
 
