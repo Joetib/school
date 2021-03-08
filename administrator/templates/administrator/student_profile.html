@@ -8,7 +8,7 @@
 
 <div class="row">
     <div class="col-lg-4 mt-3">
-        <div class="bg-white p-3 usrpic  text-center b-radius">
+        <div class="bg-white shadow p-3 usrpic  text-center b-radius">
             <div class="p-3">
                 <img class="stdpic" src="{% if student.user.picture %}{{ student.user.picture.url }}{% endif %}" alt="">
             </div>
@@ -25,25 +25,25 @@
     </div>
 
     <div class="col-lg-8 mt-3">
-        <div class="bg-white p-3 b-radius curi-font">
+        <div class="bg-white shadow p-3 b-radius">
             <span class="text-bolder">Student Info</span>
             <hr>
             Full Name: <span class="mr-3">{{ student.user.last_name }} {{ student.user.first_name }}</span>
             <hr>
             <div class="row">
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     Stage: <span class="mr-3">{{ student.user.class }}</span>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     Sex: <span class="mr-3">{{ student.user.sex }}</span>
                 </div>
             </div>
             <hr>
             <div class="row">
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     DoB: <span class="mr-3">{{ student.user.date_of_birth }}</span>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     Age: <span class="mr-3">{{ age }}</span>
                 </div>
             </div>
@@ -51,16 +51,16 @@
             <span class="text-center text-bolder">Health Info</span>
             <hr>
             <div class="row">
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     NHIS #: <span class="mr-3">{{ student.health_insurance }}</span>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     Physically Disabled: <span class="mr-3">{% if student.physically_disabled %} Yes {% else %} No {% endif %}</span>
                 </div>
             </div>
             <hr>
             <div class="row">
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     Any Known Disease: <span class="mr-3">{{ student.known_health_disorder }}</span>
                 </div>
             </div>
@@ -68,19 +68,19 @@
             <span class="text-center text-bolder">Parent Info</span>
             <hr>
             <div class="row">
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     Guardian Name: <span class="mr-3">{{ student.parent_name }}</span>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     Guardian #: <span class="mr-3">{{ student.parent_phone_number }}</span>
                 </div>
             </div>
             <hr>
             <div class="row">
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     Email: <span class="mr-3">{{ student.user.email }}</span>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     Address: <span class="mr-3">{{ student.address }}</span>
                 </div>
             </div>
@@ -88,10 +88,10 @@
             <span class="text-center text-bolder">Other Info</span>
             <hr>
             <div class="row">
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     Emergeny Contact Person: <span class="mr-3">{{ student.emergency_contact_person }}</span>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     Emergency Contact #: <span class="mr-3">{{ student.emergency_contact_phone }}</span>
                 </div>
             </div>

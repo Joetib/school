@@ -8,7 +8,7 @@
 
 <div class="row">
     <div class="col-lg-4 mt-3">
-        <div class="bg-white p-3 usrpic  text-center b-radius">
+        <div class="bg-white shadow p-3 usrpic  text-center b-radius">
             <div class="p-3">
                 <img class="stdpic" src="{% if teacher.user.picture %}{{ teacher.user.picture.url }}{% endif %}" alt="">
             </div>
@@ -24,43 +24,43 @@
     </div>
 
     <div class="col-lg-8 mt-3">
-        <div class="bg-white p-3 b-radius curi-font">
+        <div class="bg-white p-3 b-radius shadow">
             <span class="text-bolder">Teacher's Info</span>
             <hr>
             Full Name: <span class="mr-3">{{ teacher.user.last_name }} {{ teacher.user.first_name }}</span>
             <hr>
             <div class="row">
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     Classes: <span class="mr-3"> </span>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     Subjects: <span class="mr-3"> </span>
                 </div>
             </div>
             <hr>
             <div class="row">
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     Sex: <span class="mr-3">{{ teacher.user.sex }}</span>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     DoB: <span class="mr-3">{{ teacher.user.date_of_birth }}</span>
                 </div>
             </div>
             <hr>
             <div class="row">
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     Age: <span class="mr-3">{{ age }}</span>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     Phone #: <span class="mr-3">{{ teacher.phone_number }}</span>
                 </div>
             </div>
             <hr>
             <div class="row">
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     Email: <span class="mr-3">{{ teacher.user.email }}</span>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     Other duties: <span class="mr-3"></span>
                 </div>
             </div>
@@ -68,16 +68,16 @@
             <span class="text-center text-bolder">Health Info</span>
             <hr>
             <div class="row">
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     NHIS #: <span class="mr-3">{{ teacher.health_insurance }}</span>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     Physically Disabled: <span class="mr-3">{% if teacher.physically_disabled %} Yes {% else %} No {% endif %}</span>
                 </div>
             </div>
             <hr>
             <div class="row">
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     Any Known Disease: <span class="mr-3">{{ teacher.known_health_disorder }}</span>
                 </div>
             </div>
@@ -85,10 +85,10 @@
             <span class="text-center text-bolder">Other Info</span>
             <hr>
             <div class="row">
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     Emergeny Contact Person: <span class="mr-3">{{ teacher.emergency_contact_person }}</span>
                 </div>
-                <div class="col-6">
+                <div class="col-12 col-md-6">
                     Emergency Contact #: <span class="mr-3">{{ teacher.emergency_contact_phone }}</span>
                 </div>
             </div>
