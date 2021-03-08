@@ -15,7 +15,7 @@
             <div class="stdinfo">
                 <h4>{{ student.user.last_name }} {{ student.user.first_name }}</h4>
                 <span class="text-{% if not student.dismessed %}success{% else %}danger{% endif %}">&#x25cf;</span>
-                Student | 
+                Student |
             </div>
             <div class="mt-3">
                 <a href="#" class="btn btn-outline-primary btn-sm">Edit Profile</a>
@@ -28,73 +28,123 @@
         <div class="bg-white shadow p-3 b-radius">
             <span class="text-bolder">Student Info</span>
             <hr>
-            Full Name: <span class="mr-3">{{ student.user.last_name }} {{ student.user.first_name }}</span>
-            <hr>
+
             <div class="row">
-                <div class="col-12 col-md-6">
-                    Stage: <span class="mr-3">{{ student.user.class }}</span>
-                </div>
-                <div class="col-12 col-md-6">
-                    Sex: <span class="mr-3">{{ student.user.sex }}</span>
+                <div class="col-12 col-md-12 shadow-none card card-border-none">
+                    Full Name
+                    <span class="p-2 text-uppercase curi-font profinfo">
+                        {{ student.user.last_name }} {{ student.user.first_name }}
+                    </span>
                 </div>
             </div>
             <hr>
             <div class="row">
-                <div class="col-12 col-md-6">
-                    DoB: <span class="mr-3">{{ student.user.date_of_birth }}</span>
+                <div class="col-12 col-md-6 shadow-none card card-border-none">
+                    Stage
+                    <span class="p-2 text-uppercase curi-font profinfo">
+                        {{ student.user.class }} 6
+                    </span>
                 </div>
-                <div class="col-12 col-md-6">
-                    Age: <span class="mr-3">{{ age }}</span>
+                <div class="col-12 col-md-6 shadow-none card card-border-none">
+                    Sex
+                    <span class="p-2 text-uppercase curi-font profinfo">
+                        {{ student.user.sex }}
+                    </span>
                 </div>
             </div>
             <hr>
+            <div class="row">
+                <div class="col-12 col-md-6 shadow-none card card-border-none">
+                    DoB
+                    <span class="p-2 text-uppercase curi-font profinfo">
+                        {{ student.user.date_of_birth }}
+                    </span>
+                </div>
+                <div class="col-12 col-md-6 shadow-none card card-border-none">
+                    Age
+                    <span class="p-2 text-uppercase curi-font profinfo">
+                        {{ age }}
+                    </span>
+                </div>
+            </div>
+            <hr>
+
+
             <span class="text-center text-bolder">Health Info</span>
             <hr>
             <div class="row">
-                <div class="col-12 col-md-6">
-                    NHIS #: <span class="mr-3">{{ student.health_insurance }}</span>
+                <div class="col-12 col-md-6 shadow-none card card-border-none">
+                    NHIS #
+                    <span class="p-2 text-uppercase curi-font profinfo">
+                        {{ student.health_insurance }}
+                    </span>
                 </div>
-                <div class="col-12 col-md-6">
-                    Physically Disabled: <span class="mr-3">{% if student.physically_disabled %} Yes {% else %} No {% endif %}</span>
+                <div class="col-12 col-md-6 shadow-none card card-border-none">
+                    Physically Disabled
+                    <span class="p-2 text-uppercase curi-font profinfo">
+                        {% if student.physically_disabled %} Yes {% else %} No {% endif %}
+                    </span>
                 </div>
             </div>
             <hr>
             <div class="row">
-                <div class="col-12 col-md-6">
-                    Any Known Disease: <span class="mr-3">{{ student.known_health_disorder }}</span>
+                <div class="col-12 col-md-6 shadow-none card card-border-none">
+                    Any Known Disease
+                    <span class="p-2 text-uppercase curi-font profinfo">
+                        {{ student.known_health_disorder }}
+                    </span>
                 </div>
             </div>
             <hr>
             <span class="text-center text-bolder">Parent Info</span>
             <hr>
             <div class="row">
-                <div class="col-12 col-md-6">
-                    Guardian Name: <span class="mr-3">{{ student.parent_name }}</span>
+                <div class="col-12 col-md-6 shadow-none card card-border-none">
+                    Guardian Name:
+                    <span class="p-2 text-uppercase curi-font profinfo">
+                        {{ student.parent_name }}
+                    </span>
                 </div>
-                <div class="col-12 col-md-6">
-                    Guardian #: <span class="mr-3">{{ student.parent_phone_number }}</span>
+                <div class="col-12 col-md-6 shadow-none card card-border-none">
+                    Guardian #
+                    <span class="p-2 text-uppercase curi-font profinfo">
+                        {{ student.parent_phone_number }}
+                    </span>
                 </div>
             </div>
             <hr>
             <div class="row">
-                <div class="col-12 col-md-6">
-                    Email: <span class="mr-3">{{ student.user.email }}</span>
+                <div class="col-12 col-md-6 shadow-none card card-border-none">
+                    Email
+                    <span class="p-2 text-uppercase curi-font profinfo">
+                        {{ student.user.email }}
+                    </span>
                 </div>
-                <div class="col-12 col-md-6">
-                    Address: <span class="mr-3">{{ student.address }}</span>
+                <div class="col-12 col-md-6 shadow-none card card-border-none">
+                    Address
+                    <span class="p-2 text-uppercase curi-font profinfo">
+                        {{ student.address }}
+                    </span>
                 </div>
             </div>
             <hr>
             <span class="text-center text-bolder">Other Info</span>
             <hr>
             <div class="row">
-                <div class="col-12 col-md-6">
-                    Emergeny Contact Person: <span class="mr-3">{{ student.emergency_contact_person }}</span>
+                <div class="col-12 col-md-6 shadow-none card card-border-none">
+                    Emergeny Contact Person
+                    <span class="p-2 text-uppercase curi-font profinfo">
+                        {{ student.emergency_contact_person }}
+                    </span>
                 </div>
-                <div class="col-12 col-md-6">
-                    Emergency Contact #: <span class="mr-3">{{ student.emergency_contact_phone }}</span>
+                <div class="col-12 col-md-6 shadow-none card card-border-none">
+                    Emergency Contact #
+                    <span class="p-2 text-uppercase curi-font profinfo">
+                        {{ student.emergency_contact_phone }}
+                    </span>
                 </div>
             </div>
+            
         </div>
     </div>
 

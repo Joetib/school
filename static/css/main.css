@@ -130,3 +130,11 @@ a:hover{
     justify-content: right;
     float: right;
 }
+
+.profinfo{
+    background-color: aliceblue;
+}
+
+.card-border-none{
+    border: none;
+}
