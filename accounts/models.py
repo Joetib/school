@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils import timezone
@@ -159,7 +160,24 @@ class Student(models.Model):
     def __str__(self):
         return self.user.get_full_name()
 
-
+class AcademicYear(models.Model):
+    """
+    A representation of an academic year.
+    Used to find the active classes.
+    """
+    is_active = models.BooleanField(default=True)
+    start_year = models.DateField(default=timezone.now)
+    end_year = models.DateField()
+    
+    def __str__(self):
+        return f"{self.start_year.year}/{self.end_year.year}"
+    
+    def save(self, *args, **kwargs):
+        if self.is_active and not self.pk:
+            AcademicYear.objects.filter(is_active=True).update(is_active=False)
+        if not self.end_year:
+            self.end_year = self.start_year + timedelta(weeks=52)
+        super().save(*args, **kwargs)
 
 class Klass(models.Model):
     CLASS_CHOICES=(
@@ -179,13 +197,16 @@ class Klass(models.Model):
     end_year = models.DateField(blank=True, null=True)
     teachers = models.ManyToManyField(Teacher, related_name="teachers", symmetrical=True)
     students = models.ManyToManyField(Student, related_name="klasses", symmetrical=True)
+    academic_year = models.ForeignKey(AcademicYear, related_name="klasses", on_delete=models.CASCADE)
 
     
     class Meta:
-        unique_together = ('is_active',  'klass_name')
+        unique_together = ('academic_year',  'klass_name')
         ordering = ("-is_active", "klass_name")
     
     def save(self, *args, **kwargs):
+        if self.academic_year and self.academic_year.is_active:
+            self.is_active=True
         if not self.pk:
             if self.is_active:
                 Klass.objects.filter(is_active=True, klass_name=self.klass_name).update(is_active=False, end_year=timezone.now().date())
