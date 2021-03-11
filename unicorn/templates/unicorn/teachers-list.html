@@ -26,7 +26,10 @@
                         {{ teacher.get_active_class }}
                     </td>
                     <td>{{ teacher.date_of_birth }}</td>
-                    <td><a href="{% url 'administrator:teacher-profile' teacher.id %}" class="btn btn-sm btn-success">View Profile</a></td>
+                    <td>
+                        <a href="" class="btn btn-sm btn-info"><i class="fas fa-pen-square"></i></a>
+                        <a href="{% url 'administrator:teacher-profile' teacher.id %}" class="btn btn-sm btn-success"><i class="fas fa-eye"></i></a>
+                    </td>
                 </tr>
                 {% empty %}
                 <tr>

@@ -1,5 +1,6 @@
 {% extends '_base_dashboard.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block dashboard_content %}
 <div class="container ">
@@ -43,8 +44,9 @@
         <div class="col-sm-6 col-md-4 col-lg-3 badges">
             <a class="badge-content" href="#">
                 <div class="card-ico">
-                    <img class="ico" src="{% static 'images/workewrs_icon.png' %}" alt="nt fnd">
-                    <br> some data
+                    <!-- <img class="ico" src="{% static 'images/workewrs_icon.png' %}" alt="nt fnd"> -->
+                    <i class="far fa-money-bill-alt text-success fa-lg fa-3x"></i>
+                    <br> Total Earnigs
                 </div>
                 <div class="m-3 vertical-line"></div>
                 <div class="stdnumber">
@@ -54,30 +56,104 @@
         </div>
     </div>
 
-    <div class="row mt-3">
-        <div class="col-lg-6 badges">
+    <div class="row mt-3 py-3">
+        <div class="col-lg-8 badges">
             <div class="fees-info p-3">
                 <div class="fee-text">
                     <i class="fas fa-hand-holding-usd mr-3 text-success"></i> Fees Collection
                     <hr>
                 </div>
-                <div class="row">
-
-                <div class="col-12  text-white text-center">
-                    <a class=" btn w-100 btn-light " href="{% url 'administrator:create-class' %}">Create
-                        Class</a>
-
+                <div class="row ml-1">
+                    <div class="col-5 text-left fee-collec">
+                        <div class="fee-collec d-flex">
+                            <i class="fas fa-database text-warning fa-lg mr-2"></i>
+                            <div class="">
+                                <span class="text-bolder"> $ 300,000.00</span> <br>
+                                <span style="font-size: 0.75rem;">Collections</span>
+                            </div>
+                        </div>
+                        <div class="expenses mt-4 d-flex">
+                            <i class="fas fa-shopping-cart fa-lg text-danger mr-2"></i>
+                            <div class="">
+                                <span class="text-bolder"> $ 300,000.00</span> <br>
+                                <span style="font-size: 0.75rem;">Expenses</span>
+                            </div>
+                        </div>
+                        <div class="net-fee mt-4 d-flex">
+                            <i class="far fa-money-bill-alt text-success fa-lg mr-2"></i>
+                            <div class="">
+                                <span class="text-bolder"> $ 300,000.00</span> <br>
+                                <span style="font-size: 0.75rem;">Net Fees</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-7 text-center align-items-center">
+                        <h5>Put some Graph here</h5>
+                    </div>
                 </div>
-                <div class="col-12">
-                    som content here and more of Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis
-                    explicabo eum dolor necessitatibus repudiandae aperiam debitis minima maiores accusantium ducimus
-                    dicta adipisci at, exercitationem nesciunt fugit quia, corrupti reiciendis facilis?
+                <hr>
+                <div class="feeinfo">
+                    <div class="d-flex flex-row justify-content-between">
+                        <p>0 payments</p>
+                        <p class="ml-2">0 part payment</p>
+                        <p class="ml-2">0 oweing</p>
+                    </div>
                 </div>
-            </div>
 
             </div>
         </div>
-        <div class="col-lg-6 badges">
+        <div class="col-lg-4">
+            <div class="notice-board p-3 card1">
+                <div class=" row justify-content-between">
+                    <div class="ml-2">
+                        <i class="far fa-calendar-check"></i> To Do
+                    </div>
+                    <div class="mr-2">
+                        <a href="#"><i class="fas fa-plus-circle"></i></a>
+                    </div>
+                </div>
+                <hr>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row my-3 py-3">
+        
+        <div class="col-lg-4">
+            <div class="notice-board p-3 card1">
+                <div class=" row justify-content-between">
+                    <div class="ml-2">
+                        <i class="fas fa-columns color-purple"></i> Notice Board
+                    </div>
+                    <div class="mr-2">
+                        <a href="{% url 'administrator:create-notice' %}"><i
+                                class="fas fa-plus-circle color-purple"></i></a>
+                    </div>
+                </div>
+                <hr>
+                {% for notice in notices %}
+                <a href="#">
+                    <div class="schedule-card">
+                        <div class="insidebox">
+                            <a href="{% url 'administrator:delete-notice-item' notice.id %}"><i class="far fa-trash-alt mr-2 text-danger"></i></a>
+                            <span class="schedule-start">{{ notice.title }}</span> <br>
+                            <span class="text-info">{{ notice.content }}</span> <br>
+                            <div class="mt-2">
+                                {% if notice.date%}
+                                <span class="schedule-tag">{{ notice.date.date }} </span>
+                                {% endif %}
+                                <span style="font-size: 0.5rem; color: black">{{ notice.date_created | naturaltime }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-lg-8 badges">
             <div class="fees-info p-3">
                 <div class="academic-cal-text">
                     <i class="far fa-calendar-alt mr-3 text-warning"></i> Academic Calender
@@ -90,28 +166,11 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="row my-3 py-3">
-        <div class="col-lg-4">
-            <div class="upcoming-event p-3 card1">
-                <i class="fas fa-calendar-day mr-3 text-primary"></i> Upcoming Event
-                <hr>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="notice-board p-3 card1">
-                <i class="fas fa-columns text-danger"></i> Notice Board
-                <hr>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="notice-board p-3 card1">
-                <i class="fas fa-columns text-danger"></i> Recent Activities
-                <hr>
-            </div>
-        </div>
+
+
     </div>
 </div>
+
 
 <br>
 {% endblock %}

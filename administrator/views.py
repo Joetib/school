@@ -9,7 +9,7 @@ from . import forms
 from django.views.generic import ListView, TemplateView, CreateView
 from django.contrib.auth import get_user_model
 
-from accounts.models import Student, Teacher, Course
+from accounts.models import Student, Teacher, Course, NoticeBoard
 from datetime import datetime
 # Create your views here.
 
@@ -18,10 +18,10 @@ User = get_user_model()
 @login_required
 @administrator_required
 def dashboard(request):
-
     return render(request, 'administrator/dashboard.html', {
         'teachers': User.objects.filter(is_teacher=True),
         'students': User.objects.filter(is_student=True),
+        'notices': NoticeBoard.objects.all(),
     })
 
 class StudentListView(TemplateView):
@@ -109,3 +109,19 @@ class CoursetListView(ListView):
 
     def get_queryset(self, *args, **kwargs):
         return Course.objects.all()
+
+
+def create_notice(request):
+    if request.method == "POST":
+        form = forms.CreateNoticeForm(request.POST, files=request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect("administrator:dashboard")
+    else:
+        form = forms.CreateNoticeForm()
+    return render(request, 'administrator/create_notice.html', {'form':form})
+
+def delete_notice_item(request, id):
+    notice = get_object_or_404(NoticeBoard, id=id)
+    notice.delete()
+    return redirect("administrator:dashboard")

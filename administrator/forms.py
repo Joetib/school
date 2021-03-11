@@ -1,4 +1,4 @@
-from accounts.models import Klass, Course
+from accounts.models import Klass, Course, NoticeBoard
 from django import forms
 from django.contrib.auth import get_user_model
 from crispy_forms.helper import FormHelper
@@ -116,5 +116,22 @@ class CourseCreateForm(forms.ModelForm):
                     Column("description", css_class="col-sm-6 "),
                 ),
             ),
+        )
+        self.helper.form_tag = False
+
+class CreateNoticeForm(forms.ModelForm):
+    date = forms.DateField(widget=forms.DateInput(attrs={"type": "date"}), required=False)
+
+    class Meta:
+        model = NoticeBoard
+        fields = ("title", "content", "date",)
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Column("title"),
+            Column("content"),
+            Column("date"),
         )
         self.helper.form_tag = False

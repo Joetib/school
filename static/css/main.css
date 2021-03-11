@@ -72,8 +72,10 @@ a:hover{
 }
 
 .card1{
-    height: 300px;
+    height: auto;
     background-color: white;
+    font: 1em sans-serif;
+    font-size: 15px;
 }
 
 .cls{
@@ -173,4 +175,56 @@ a:hover{
     .text-rt {
       text-align: left;
     }
+}
+
+.schedule-tag{
+    color:#fff;
+    background-color: #6164b2;
+    padding:3px 8px;
+    margin-right: 15px;
+    width: 90px;
+    font-family: 'Titillium Web';
+    text-align: center;
+
+}
+.schedule-card{
+    position: relative;
+    margin-bottom: 0.7em;
+}
+.schedule-card:hover .insidebox {
+    transform: scale(1.033);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.schedule-card:hover:after {
+    background: #8a56d1;
+    width: 25px;
+}
+.schedule-card:after {
+    height: 2px;
+    width: 22px;
+    background: #ddd;
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -22px;
+    transition: all 0.3s ease-in;
+}
+.insidebox { 
+    box-shadow: 0 0px 5px rgba(0,0,0,.07);
+    background: #ffffff;
+    width: 100%;
+    height: auto;
+    -webkit-align-items: center;
+    align-items: center;
+    padding: 10px 20px;
+    color: #6164B2;
+    transition: all 0.2s ease-in;
+}
+
+.color-purple{
+    color: #6164B2;
+}
+
+.fee-collec{
+    line-height: 1;
 }
