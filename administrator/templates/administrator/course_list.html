@@ -1,0 +1,65 @@
+{% extends '_base_dashboard.html' %}
+{% load static %}
+
+{% block dashboard_content %}
+<div class="row">
+    <div class="col-12 cls-btns">
+        <a href="{% url 'administrator:create-course' %}">
+            <div class=" m-0 info-color shadow btn btn-primary  white-text text-center py-2">
+                <i class="fas fa-plus-circle mr-4"></i> Add Course
+            </div>
+        </a>
+        <a href="#">
+            <div class=" m-0 info-color shadow btn btn-info  white-text text-center py-2">
+                <i class="fas fa-plus-circle mr-4"></i> Assign Teacher
+            </div>
+        </a>
+    </div>
+    <br>
+
+    <div class="container">
+        <!-- put component code here -->
+        <div class="mt-4 bg-white p-3 shadow">
+            
+            <input type="text" unicorn:model.debounce-500="query_string" class="form-control"
+                placeholder="Enter Name...">
+        </div>
+        <div class="py-5">
+            <table class="table table-striped shadow bg-white">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Course Name</th>
+                        <th>Class</th>
+                        <th>No. of Studnets</th>
+                        <th>Assigned Teacher</th>
+                        <th>Active</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for course in courses %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ course.name }}</td>
+                        <td>{{ course.klass }}</td>
+                        <td>{{ course.students.count }}</td>
+                        <td>{{ course.teacher }}</td>
+                        <td>{{ course.is_active }}</td>
+                        <td>
+                            <a href="" class="btn btn-sm btn-info"><i class="fas fa-pen-square"></i></a>
+                            <a href="" class="btn btn-sm btn-success"><i class="fas fa-eye"></i></a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-danger  text-center">No Subject.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

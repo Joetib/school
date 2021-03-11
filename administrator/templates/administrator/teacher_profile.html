@@ -7,14 +7,14 @@
 </div>
 
 <div class="row">
-    <div class="col-lg-4 mt-3">
+    <div class="col-lg-3 mt-3">
         <div class="bg-white shadow p-3 usrpic  text-center b-radius">
             <div class="p-3">
                 <img class="stdpic" src="{% if teacher.user.picture %}{{ teacher.user.picture.url }}{% endif %}" alt="">
             </div>
             <div class="stdinfo">
                 <h4>{{ teacher.user.last_name }} {{ teacher.user.first_name }}</h4>
-                {{ teacher.position }} 
+                {{ teacher.position }}
             </div>
             <div class="mt-3">
                 <a href="#" class="btn btn-outline-primary btn-sm">Edit Profile</a>
@@ -23,75 +23,181 @@
         </div>
     </div>
 
-    <div class="col-lg-8 mt-3">
-        <div class="bg-white p-3 b-radius shadow">
-            <span class="text-bolder">Teacher's Info</span>
-            <hr>
-            Full Name: <span class="mr-3">{{ teacher.user.last_name }} {{ teacher.user.first_name }}</span>
-            <hr>
-            <div class="row">
-                <div class="col-12 col-md-6">
-                    Classes: <span class="mr-3"> </span>
+    <div class="col-lg-9 mt-3">
+        <div class="bg-white shadow p-3">
+            <nav>
+                <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+                    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#profile-info"
+                        role="tab" aria-controls="nav-home" aria-selected="true">User Info.</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#change-password"
+                        role="tab" aria-controls="nav-profile" aria-selected="false">Change Password</a>
+                    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#support" role="tab"
+                        aria-controls="nav-profile" aria-selected="false">Support</a>
                 </div>
-                <div class="col-12 col-md-6">
-                    Subjects: <span class="mr-3"> </span>
+            </nav>
+            <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="profile-info" role="tabpanel">
+                    <h5 class="display-5 color-1 pt-3">1. Profile Detail </h5>
+                    <br>
+                    <div class="container">
+                        <div class="row info-side mb-3">
+                            <div class="col-12 col-md-3  text-rt text-uppercase text-bolder color-1">
+                                First Name</div>
+                            <div class="col-12 col-md-9 profinfo p-2">
+                                <span class=" text-uppercase w-100">
+                                    {{ teacher.user.first_name }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row info-side mb-3">
+                            <div class="col-12 col-md-3  text-rt text-uppercase text-bolder color-1">
+                                Middle Name</div>
+                            <div class="col-12 col-md-9 profinfo p-2">
+                                <span class=" text-uppercase w-100">
+                                    {{ teacher.user.middle_name }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row info-side mb-3">
+                            <div class="col-12 col-md-3  text-rt text-uppercase text-bolder color-1">
+                                Last Name</div>
+                            <div class="col-12 col-md-9 profinfo p-2">
+                                <span class=" text-uppercase w-100">
+                                    {{ teacher.user.last_name }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row info-side mb-3">
+                            <div class="col-12 col-md-3  text-rt text-uppercase text-bolder color-1">
+                                Gender</div>
+                            <div class="col-12 col-md-9 profinfo p-2">
+                                <span class=" text-uppercase w-100">
+                                    {{ teacher.user.sex}}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row info-side mb-3">
+                            <div class="col-12 col-md-3  text-rt text-uppercase text-bolder color-1">
+                                Phone Number</div>
+                            <div class="col-12 col-md-9 profinfo p-2">
+                                <span class=" text-uppercase w-100">
+                                    {{ teacher.phone_number }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5 class="display-5 color-1 mt-5 pt-3">2. Parentes/Gurdian Info </h5>
+                    <br>
+                    <div class="container">
+                        <div class="row info-side mb-3">
+                            <div class="col-12 col-md-3  text-rt text-uppercase text-bolder color-1">
+                                Guradian Name</div>
+                            <div class="col-12 col-md-9 profinfo p-2">
+                                <span class=" text-uppercase w-100">
+                                    {{ teacher.parent_name }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row info-side mb-3">
+                            <div class="col-12 col-md-3  text-rt text-uppercase text-bolder color-1">
+                                Occupation</div>
+                            <div class="col-12 col-md-9 profinfo p-2">
+                                <span class=" text-uppercase w-100">
+                                    {{ teacher.parent_occupation }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row info-side mb-3">
+                            <div class="col-12 col-md-3  text-rt text-uppercase text-bolder color-1">
+                                Phone Number</div>
+                            <div class="col-12 col-md-9 profinfo p-2">
+                                <span class=" text-uppercase w-100">
+                                    {{ teacher.parent_phone_number }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5 class="display-5 color-1 mt-5 pt-3">3. School Info </h5>
+                    <br>
+                    <div class="container">
+                        <div class="row info-side mb-3">
+                            <div class="col-12 col-md-3  text-rt text-uppercase text-bolder color-1">
+                                Class</div>
+                            <div class="col-12 col-md-9 profinfo p-2">
+                                <span class=" text-uppercase w-100">
+                                    {{ teacher.stage }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5 class="display-5 color-1 mt-5 pt-3">4. Health Info</h5>
+                    <br>
+                    <div class="container">
+                        <div class="row info-side mb-3">
+                            <div class="col-12 col-md-3  text-rt text-uppercase text-bolder color-1">
+                                NHIS #</div>
+                            <div class="col-12 col-md-9 profinfo p-2">
+                                <span class=" text-uppercase w-100">
+                                    {{ teacher.health_insurance }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row info-side mb-3">
+                            <div class="col-12 col-md-3  text-rt text-uppercase text-bolder color-1">
+                                Any Health Disorder</div>
+                            <div class="col-12 col-md-9 profinfo p-2">
+                                <span class=" text-uppercase w-100">
+                                    {{ teacher.known_health_disorder }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row info-side mb-3">
+                            <div class="col-12 col-md-3  text-rt text-uppercase text-bolder color-1">
+                                Physically Disabled</div>
+                            <div class="col-12 col-md-9 profinfo p-2">
+                                <span class=" text-uppercase w-100">
+                                    {{ teacher.physically_disabled }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h5 class="display-5 color-1 mt-5 pt-3">5. Other Info</h5>
+                    <br>
+                    <div class="container">
+                        <div class="row info-side mb-3">
+                            <div class="col-12 col-md-3  text-rt text-uppercase text-bolder color-1">
+                                emergency Contact Person</div>
+                            <div class="col-12 col-md-9 profinfo p-2">
+                                <span class=" text-uppercase w-100">
+                                    {{ teacher.emergency_contact_person }}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row info-side mb-3">
+                            <div class="col-12 col-md-3  text-rt text-uppercase text-bolder color-1">
+                                Emergency Contact #</div>
+                            <div class="col-12 col-md-9 profinfo p-2">
+                                <span class=" text-uppercase w-100">
+                                    {{ teacher.emergency_contact_phone }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="change-password" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    Change password page
+                </div>
+
+                <div class="tab-pane fade" id="support" role="tabpanel" aria-labelledby="nav-contact-tab">
+                    support page
                 </div>
             </div>
-            <hr>
-            <div class="row">
-                <div class="col-12 col-md-6">
-                    Sex: <span class="mr-3">{{ teacher.user.sex }}</span>
-                </div>
-                <div class="col-12 col-md-6">
-                    DoB: <span class="mr-3">{{ teacher.user.date_of_birth }}</span>
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-12 col-md-6">
-                    Age: <span class="mr-3">{{ age }}</span>
-                </div>
-                <div class="col-12 col-md-6">
-                    Phone #: <span class="mr-3">{{ teacher.phone_number }}</span>
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-12 col-md-6">
-                    Email: <span class="mr-3">{{ teacher.user.email }}</span>
-                </div>
-                <div class="col-12 col-md-6">
-                    Other duties: <span class="mr-3"></span>
-                </div>
-            </div>
-            <hr>
-            <span class="text-center text-bolder">Health Info</span>
-            <hr>
-            <div class="row">
-                <div class="col-12 col-md-6">
-                    NHIS #: <span class="mr-3">{{ teacher.health_insurance }}</span>
-                </div>
-                <div class="col-12 col-md-6">
-                    Physically Disabled: <span class="mr-3">{% if teacher.physically_disabled %} Yes {% else %} No {% endif %}</span>
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-12 col-md-6">
-                    Any Known Disease: <span class="mr-3">{{ teacher.known_health_disorder }}</span>
-                </div>
-            </div>
-            <hr>
-            <span class="text-center text-bolder">Other Info</span>
-            <hr>
-            <div class="row">
-                <div class="col-12 col-md-6">
-                    Emergeny Contact Person: <span class="mr-3">{{ teacher.emergency_contact_person }}</span>
-                </div>
-                <div class="col-12 col-md-6">
-                    Emergency Contact #: <span class="mr-3">{{ teacher.emergency_contact_phone }}</span>
-                </div>
-            </div>
+
         </div>
     </div>
 

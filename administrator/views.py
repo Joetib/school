@@ -9,7 +9,7 @@ from . import forms
 from django.views.generic import ListView, TemplateView, CreateView
 from django.contrib.auth import get_user_model
 
-from accounts.models import Student, Teacher
+from accounts.models import Student, Teacher, Course
 from datetime import datetime
 # Create your views here.
 
@@ -91,7 +91,21 @@ class KlassListview(ListView):
         return Klass.objects.filter(end_year__gte=timezene.now())
 
 
-""" class SubjectList(ListView):
+def create_course(request):
+    if request.method == "POST":
+        form = forms.CourseCreateForm(request.POST, files=request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect("administrator:dashboard")
+    else:
+        form = forms.CourseCreateForm()
+    return render(request, 'administrator/create_course.html', {'form': form})
+
+
+class CoursetListView(ListView):
     model = Course
-    template_name = 'administration/subject_list.html'
-    context_object_name = 'subjects' """
+    template_name = 'administrator/course_list.html'
+    context_object_name = 'courses'
+
+    def get_queryset(self, *args, **kwargs):
+        return Course.objects.all()

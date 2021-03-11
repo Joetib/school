@@ -1,4 +1,4 @@
-from accounts.models import Klass
+from accounts.models import Klass, Course
 from django import forms
 from django.contrib.auth import get_user_model
 from crispy_forms.helper import FormHelper
@@ -81,7 +81,7 @@ class KlassCreateForm(forms.ModelForm):
 
     class Meta:
         model = Klass
-        fields = ("klass_name", "is_active", "start_year", "end_year")
+        fields = ("klass_name", "is_active", "start_year", "end_year", "academic_year",)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -89,10 +89,31 @@ class KlassCreateForm(forms.ModelForm):
         self.helper.layout = Layout(
             Column("klass_name"),
             Column("is_active"),
+            Column("academic_year"),
             Column(
                 Row(
                     Column("start_year", css_class="col-sm-6"),
                     Column("end_year", css_class="col-sm-6 "),
+                ),
+            ),
+        )
+        self.helper.form_tag = False
+
+class CourseCreateForm(forms.ModelForm):
+    class Meta:
+        model = Course
+        fields = ("klass", "name", "description", "teacher",)
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Column("klass"),
+            Column("teacher"),
+            Column(
+                Row(
+                    Column("name", css_class="col-sm-6"),
+                    Column("description", css_class="col-sm-6 "),
                 ),
             ),
         )
