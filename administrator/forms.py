@@ -1,5 +1,6 @@
 from django.db.models.query_utils import Q
 from accounts.models import AcademicYear, Klass, Student
+from accounts.models import Klass, Course, NoticeBoard
 from django import forms
 from django.contrib.auth import get_user_model
 from crispy_forms.helper import FormHelper
@@ -110,3 +111,42 @@ class AddStudentToClassForm(forms.Form):
         if klass:
             students = students.exclude(klasses=klass)
         self.fields['students'].queryset = students
+            
+        self.helper.form_tag = False
+
+class CourseCreateForm(forms.ModelForm):
+    class Meta:
+        model = Course
+        fields = ("klass", "name", "description", "teacher",)
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Column("klass"),
+            Column("teacher"),
+            Column(
+                Row(
+                    Column("name", css_class="col-sm-6"),
+                    Column("description", css_class="col-sm-6 "),
+                ),
+            ),
+        )
+        self.helper.form_tag = False
+
+class CreateNoticeForm(forms.ModelForm):
+    date = forms.DateField(widget=forms.DateInput(attrs={"type": "date"}), required=False)
+
+    class Meta:
+        model = NoticeBoard
+        fields = ("title", "content", "date",)
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.layout = Layout(
+            Column("title"),
+            Column("content"),
+            Column("date"),
+        )
+        self.helper.form_tag = False

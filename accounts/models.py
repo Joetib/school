@@ -254,3 +254,28 @@ def create_related_profile(sender, instance, created=False, **kwargs):
         Student.objects.get_or_create(user=instance)
     elif instance.is_teacher:
         Teacher.objects.get_or_create(user=instance)
+
+
+""" class Fee(models.Model):
+    payment_by = models.CharField(max_length=100)
+    student = models.ForeignKey(Student, on_delete=models.SET_NULL)
+    klass = models.ForeignKey(Klass, on_delete=models.SET_NULL)
+    amount = models.PositiveIntegerField()
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.student """
+
+
+class NoticeBoard(models.Model):
+    title = models.CharField(max_length=100)
+    content = models.TextField()
+    date = models.DateTimeField(null=True, help_text="add date if event has a date")
+    date_created = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        ordering = ("-date_created",)
+
+    def __str__(self):
+        return self.title
+
+    

@@ -19,5 +19,9 @@ urlpatterns = [
     path('academic-year/', views.AcademicYearListView.as_view(), name="academic-year-list"),
     path('academic-year/create/', views.create_academic_year, name="create-academic-year"),
     path('academic-year/<int:pk>/', views.AcademicYearDetailView.as_view(), name="academic-year-detail"),
+    path('course/create/', views.create_course, name="create-course"),
+    path('couerse/list/', views.CoursetListView.as_view(), name="course-list"),
+    path('notice/create/', views.create_notice, name="create-notice"),
+    path('notice/delete/<int:id>/', views.delete_notice_item, name="delete-notice-item"),
 
 ]

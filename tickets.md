@@ -28,3 +28,13 @@
 - [ ] Ask questions
 - [ ] Take a quiz
 - [ ] see academic materials
+- [ ] view notice board
+
+## General
+------------------------------
+- [ ] bill / fee collection data
+- [x] create couorse
+- [x] course list view
+- [x] post on notice board
+- [x] delete notice item
+- [ ] academic calender
