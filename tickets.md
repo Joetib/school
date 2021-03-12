@@ -4,8 +4,10 @@
 - [x] Create Student
 - [x] Create Teacher
 - [x] Create class
+- [x] Create Academic Year
+- [x] view classes in Academic Year
+- [x] Assign Student to Class
 - [ ] Assign Teacher to Class
-- [ ] Assign Student to Class
 - [ ] Edit Student/Teacher Account
 - [ ] Add location information to account
 - [ ] Add Medical Record to account
