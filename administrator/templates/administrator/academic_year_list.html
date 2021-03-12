@@ -1,0 +1,36 @@
+{% extends '_base_dashboard.html' %}
+
+{% load unicorn %}
+{% load crispy_forms_tags %}
+
+{% block dashboard_content %}
+{% load unicorn %}
+
+<div class="container-fluid">
+    <div class="container-fluid">
+        <div class=" my-4 info-color shadow btn w-100 white-text text-center bg-white py-4">
+            <!-- <i class="fas fa-plus-circle mr-4"> </i>--> ACADEMIC YEARS
+        </div>
+        <a href="{% url 'administrator:create-academic-year' %}">
+            <div class=" m-0 info-color shadow btn btn-primary w-100 white-text text-center py-4">
+                <i class="fas fa-plus-circle mr-4"></i> Create New Academic Year
+            </div>
+        </a>
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            {% for academic_year in academic_years %}
+            <div class="col-md-6 col-lg-4 py-4">
+                <a href="{{ academic_year.get_admin_absolute_url }}">
+                    <div class="shadow p-4 bg-white">
+                        <p class="m-0 text-center"><span class="font-weight-bold">{{ academic_year }}</span> academic year.</p>
+                    </div>
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+</div>
+{% endblock %}

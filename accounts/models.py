@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 from django.db.models.signals import post_save
 from django.dispatch import receiver
@@ -168,7 +169,9 @@ class AcademicYear(models.Model):
     is_active = models.BooleanField(default=True)
     start_year = models.DateField(default=timezone.now)
     end_year = models.DateField()
-    
+    class Meta:
+        ordering = ("-is_active", '-start_year')
+
     def __str__(self):
         return f"{self.start_year.year}/{self.end_year.year}"
     
@@ -178,6 +181,17 @@ class AcademicYear(models.Model):
         if not self.end_year:
             self.end_year = self.start_year + timedelta(weeks=52)
         super().save(*args, **kwargs)
+
+    def get_admin_absolute_url(self):
+        return reverse('administrator:academic-year-detail', kwargs={'pk': self.pk})
+
+    @classmethod
+    @property
+    def current(cls, *args, **kwargs):
+        queryset = cls.objects.filter(is_active=True)
+        if queryset.exists():
+            return queryset.first()
+        raise Exception("No active Academic Year kept.")
 
 class Klass(models.Model):
     CLASS_CHOICES=(
@@ -207,6 +221,7 @@ class Klass(models.Model):
     def save(self, *args, **kwargs):
         if self.academic_year and self.academic_year.is_active:
             self.is_active=True
+        
         if not self.pk:
             if self.is_active:
                 Klass.objects.filter(is_active=True, klass_name=self.klass_name).update(is_active=False, end_year=timezone.now().date())
@@ -214,6 +229,9 @@ class Klass(models.Model):
 
     def __str__(self):
         return self.klass_name
+    
+    def get_admin_absolute_url(self):
+        return reverse('administrator:class-detail', kwargs={'pk': self.pk})
 
 class Course(models.Model):
     klass = models.ForeignKey(Klass, related_name="courses", on_delete=models.CASCADE)

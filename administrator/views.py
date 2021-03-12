@@ -1,4 +1,4 @@
-from accounts.models import Klass
+from accounts.models import AcademicYear, Klass
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -6,7 +6,7 @@ from .utils import administrator_required
 from django.http.request import HttpRequest
 from django.http.response import HttpResponse
 from . import forms
-from django.views.generic import ListView, TemplateView, CreateView
+from django.views.generic import ListView, TemplateView, CreateView, DetailView
 from django.contrib.auth import get_user_model
 
 from accounts.models import Student, Teacher
@@ -72,12 +72,42 @@ def teacher_profile(request, id):
     age = int((datetime.now().date() - teacher.user.date_of_birth).days / 365 )
     return render(request, 'administrator/teacher_profile.html', {'teacher':teacher,'age':age})
 
+def create_academic_year(request: HttpRequest):
+    if request.method == "POST":
+        academic_year_form = forms.AcademicYearForm(request.POST)
+        if academic_year_form.is_valid():
+            academic_year = academic_year_form.save()
+            return redirect(academic_year.get_admin_absolute_url())
+    else:
+        academic_year_form = forms.AcademicYearForm()
+    return render(request, "administrator/create_academic_year.html", {'form': academic_year_form})
+""" class SubjectList(ListView):
+    model = Course
+    template_name = 'administration/subject_list.html'
+    context_object_name = 'subjects' """
+
+class AcademicYearListView(ListView):
+    model = AcademicYear
+    context_object_name = "academic_years"
+    template_name = "administrator/academic_year_list.html"
+
+
+class AcademicYearDetailView(DetailView):
+    model = AcademicYear
+    context_object_name = "academic_year"
+    template_name = "administrator/academic_year_detail.html"
+
+
+
 def create_klass(request: HttpRequest, *args, **kwargs) -> HttpResponse:
     if request.method == "POST":
         form = forms.KlassCreateForm(request.POST, files=request.FILES)
         if form.is_valid():
             klass = form.save()
             return redirect("administrator:dashboard")
+        else:
+            print("Form is invalid\n\n\n\n")
+            print(form.errors)
     else:
         form = forms.KlassCreateForm()
     return render(request, 'administrator/create_class.html', {'form': form})
@@ -88,10 +118,27 @@ class KlassListview(ListView):
     context_object_name = "classes"
 
     def qet_queryset(self, *args, **kwargs):
-        return Klass.objects.filter(end_year__gte=timezene.now())
+        return Klass.objects.filter(academic_year__is_active=True)
 
+class KlassDetailView(DetailView):
+    model = Klass
+    template_name = "administrator/klass_detail.html"
+    context_object_name = "klass"
 
-""" class SubjectList(ListView):
-    model = Course
-    template_name = 'administration/subject_list.html'
-    context_object_name = 'subjects' """
+def add_students_to_class(request: HttpRequest, pk:int):
+    klass = get_object_or_404(Klass, pk=pk, academic_year__is_active=True)
+    if request.method == "POST":
+        students_form = forms.AddStudentToClassForm(request.POST, klass=klass)
+        if students_form.is_valid():
+            cd = students_form.cleaned_data
+            # TODO: this is too slow O(n)
+            for student in cd['students']:
+                student.klasses.add(klass)
+            # a faster version is 
+            # klass.students.add(*cd['students'])
+            # but it keeps raising contraint errors.
+
+            return redirect(klass.get_admin_absolute_url())
+    else:
+        students_form = forms.AddStudentToClassForm(klass=klass)
+    return render(request, "administrator/add_student_to_class.html", {'form': students_form, 'klass': klass})

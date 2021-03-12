@@ -1,4 +1,5 @@
-from accounts.models import Klass
+from django.db.models.query_utils import Q
+from accounts.models import AcademicYear, Klass, Student
 from django import forms
 from django.contrib.auth import get_user_model
 from crispy_forms.helper import FormHelper
@@ -76,24 +77,36 @@ class TeacherCreateForm(StudentCreateForm):
 
 
 class KlassCreateForm(forms.ModelForm):
-    start_year = forms.DateField(widget=forms.DateInput(attrs={"type": "date"}))
-    end_year = forms.DateField(required=False, widget=forms.DateInput(attrs={"type": "date"}))
 
     class Meta:
         model = Klass
-        fields = ("klass_name", "is_active", "start_year", "end_year")
+        fields = ("klass_name", 'academic_year')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
             Column("klass_name"),
-            Column("is_active"),
-            Column(
-                Row(
-                    Column("start_year", css_class="col-sm-6"),
-                    Column("end_year", css_class="col-sm-6 "),
-                ),
-            ),
+            Column("academic_year")
+        
         )
         self.helper.form_tag = False
+
+class AcademicYearForm(forms.ModelForm):
+    
+    start_year = forms.DateField(widget=forms.DateInput(attrs={"type": "date"}))
+    end_year = forms.DateField(required=False, widget=forms.DateInput(attrs={"type": "date"}))
+    class Meta:
+        model = AcademicYear
+        fields = '__all__'
+
+
+class AddStudentToClassForm(forms.Form):
+    students = forms.ModelMultipleChoiceField(queryset=Student.objects.all())
+
+    def __init__(self, data=None, klass=None,*args, **kwargs, ) -> None:
+        super().__init__(data=data, *args, **kwargs)
+        students = Student.objects.filter(is_active=True).exclude(klasses__is_active=True)
+        if klass:
+            students = students.exclude(klasses=klass)
+        self.fields['students'].queryset = students
