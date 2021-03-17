@@ -142,6 +142,20 @@ def add_students_to_class(request: HttpRequest, pk:int):
     else:
         students_form = forms.AddStudentToClassForm(klass=klass)
     return render(request, "administrator/add_student_to_class.html", {'form': students_form, 'klass': klass})
+
+@administrator_required
+def add_teachers_to_class(request: HttpRequest, pk:int):
+    klass = get_object_or_404(Klass, pk=pk, academic_year__is_active=True)
+    if request.method == "POST":
+        teacher_form = forms.AddTeacherToClassForm(request.POST, instance=klass)
+        
+        if teacher_form.is_valid():
+            teacher_form.save()
+
+            return redirect(klass.get_admin_absolute_url())
+    else:
+        teacher_form = forms.AddTeacherToClassForm(instance=klass)
+    return render(request, "administrator/add_teacher_to_class.html", {'form': teacher_form, 'klass': klass})
     
 def create_course(request):
     if request.method == "POST":

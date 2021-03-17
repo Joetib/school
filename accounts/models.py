@@ -240,9 +240,11 @@ class Course(models.Model):
     teacher = models.ForeignKey(Teacher, related_name="assigned_courses", on_delete=models.SET_NULL, blank=True, null=True)
     students = models.ManyToManyField(Student, related_name="registered_courses", blank=True)
     is_active = models.BooleanField(default=True)
+    date_created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ('klass', 'name', 'is_active')
+        ordering = ('name', '-is_active', "-date_created")
+        unique_together = ('klass', 'name', 'is_active', )
 
 
 @receiver(post_save, sender=CustomUser)
@@ -278,4 +280,4 @@ class NoticeBoard(models.Model):
     def __str__(self):
         return self.title
 
-    
+

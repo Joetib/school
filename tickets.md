@@ -7,7 +7,7 @@
 - [x] Create Academic Year
 - [x] view classes in Academic Year
 - [x] Assign Student to Class
-- [ ] Assign Teacher to Class
+- [x] Assign Teacher to Class
 - [ ] Edit Student/Teacher Account
 - [ ] Add location information to account
 - [ ] Add Medical Record to account

@@ -8,21 +8,35 @@
 
 <div class="container-fluid">
     <div class="container-fluid">
-        <div class=" my-4 info-color shadow btn w-100 white-text text-center bg-white py-4">
-            <h3 class="font-weight-bold"> {{ klass }}</h3>
-            <span>{{ klass.academic_year}} academic year</span>
-        </div>
-        <a href="{% url 'administrator:add-students-to-class' pk=klass.pk %}">
-            <div class=" m-0 info-color shadow btn btn-primary w-100 white-text text-center py-4">
-                <i class="fas fa-plus-circle mr-4"></i> Add Student to Class
+
+            <div class="  my-4 info-color shadow btn w-100 white-text text-center bg-white py-4">
+                <h3 class="font-weight-bold"> {{ klass }}</h3>
+                <span>{{ klass.academic_year}} academic year</span>
             </div>
-        </a>
+            <div class="row">
+
+            <div class="col my-4">
+                <a href="{% url 'administrator:add-students-to-class' pk=klass.pk %}">
+                    <div class=" m-0 info-color shadow btn btn-primary w-100 white-text text-center py-4">
+                        <i class="fas fa-plus-circle mr-4"></i> Add Student to Class
+                    </div>
+                </a>
+            </div>
+            <div class="col my-4">
+                <a href="{% url 'administrator:add-teachers-to-class' pk=klass.pk %}">
+                    <div class=" m-0 info-color shadow btn btn-success w-100 white-text text-center py-4">
+                        <i class="fas fa-plus-circle mr-4"></i> Assign Teachers to Class
+                    </div>
+                </a>
+            </div>
+        </div>
+        
     </div>
     <div class="container-fluid">
         <div class="row">
             <div class="col-12 text-center">
                 <div class="shadow bg-white mt-4 p-3">
-                    Students
+                    <h4>Students</h4>
                 </div>
             </div>
             <div class="col-12">
@@ -45,6 +59,42 @@
                             <td>{{ student.user.last_name }}</td>
                             <td>{{ student.user.date_of_birth }}</td>
                             <td>CWA</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12 text-center">
+                <div class="shadow bg-white mt-4 p-3">
+                    <h4>Assigned Teachers</h4>
+                </div>
+            </div>
+            <div class="col-12">
+                <table class="table table-striped bg-white shadow">
+                    <thead>
+                        <tr>
+                            <td>#</td>
+                            <td>First Name</td>
+                            <td>Last Name</td>
+                            <td>Date Of Birth</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for teacher in klass.teachers.all %}
+                        <tr>
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ teacher.user.first_name }}</td>
+                            <td>{{ teacher.user.last_name }}</td>
+                            <td>{{ teacher.user.date_of_birth }}</td>
                         </tr>
                         {% endfor %}
                     </tbody>

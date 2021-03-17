@@ -111,6 +111,8 @@ class AddStudentToClassForm(forms.Form):
         if klass:
             students = students.exclude(klasses=klass)
         self.fields['students'].queryset = students
+        self.helper = FormHelper()
+        self.helper.layout = Layout('students')
             
         self.helper.form_tag = False
 
@@ -150,3 +152,10 @@ class CreateNoticeForm(forms.ModelForm):
             Column("date"),
         )
         self.helper.form_tag = False
+
+
+class AddTeacherToClassForm(forms.ModelForm):
+    class Meta:
+        model = Klass
+        fields = ("teachers",)
+

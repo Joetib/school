@@ -16,6 +16,7 @@ urlpatterns = [
     path('classes/list/', views.KlassListview.as_view(), name="class-list"),
     path('classes/list/<int:pk>', views.KlassDetailView.as_view(), name="class-detail"),
     path('classes/list/<int:pk>/add-students/', views.add_students_to_class, name="add-students-to-class"),
+    path('classes/list/<int:pk>/add-teacherss/', views.add_teachers_to_class, name="add-teachers-to-class"),
     path('academic-year/', views.AcademicYearListView.as_view(), name="academic-year-list"),
     path('academic-year/create/', views.create_academic_year, name="create-academic-year"),
     path('academic-year/<int:pk>/', views.AcademicYearDetailView.as_view(), name="academic-year-detail"),
